@@ -1,11 +1,19 @@
-import React from 'react'
+'use client';
+import { useState } from 'react';
+import Search from '../../components/dashboard/Search';
 
-function Dashboard() {
+export default function DashboardPage() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
   return (
-    <div>dashboard</div>
-  )
+    <div className='flex justify-center items-center min-h-screen'>
+
+      Welcome to the Dashboard! <br />
+      {/* <Search
+        onSearch={(query: string) => {
+          setSearchQuery(query);
+        }}
+      /> */}
+    </div>
+  );
 }
-
-Dashboard.propTypes = {}
-
-export default Dashboard
