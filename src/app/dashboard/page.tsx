@@ -1,11 +1,10 @@
-import React from 'react'
+'use client';
+import Search from '../../components/dashboard/Search';
 
-function Dashboard() {
+export default function DashboardPage() {
   return (
-    <div>dashboard</div>
-  )
+    <div>
+      <Search></Search>
+    </div>
+  );
 }
-
-Dashboard.propTypes = {}
-
-export default Dashboard

@@ -110,6 +110,7 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
+  --sidebar-background: 240 5.9% 10%;
 }
 
 @layer base {
@@ -134,7 +135,6 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 
 .purple-blue-animated {
   background: linear-gradient(270deg, #1e1b4b, #1e3a8a, #8e51ff); /* indigo-950 to blue-800 */
