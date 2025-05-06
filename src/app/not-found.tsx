@@ -12,7 +12,7 @@ export default function NotFound() {
         height={700}
         className="rounded-xl shadow-lg mb-6"
       />
-      <Link href="/">Return Home</Link>
+      <Link href="/dashboard">Return Home</Link>
     </div>
   );
 }

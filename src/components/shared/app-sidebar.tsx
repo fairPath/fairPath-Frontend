@@ -16,23 +16,23 @@ import SplitText from './SplitText';
 const items = [
   {
     title: 'Home',
-    url: '/',
+    url: '/dashboard',
     icon: Home,
   },
   {
-    title: 'Profile',
-    url: '/profile',
-    icon: User,
-  },
-  {
     title: 'Search',
-    url: '/dashboard',
+    url: '/dashboard/search-results',
     icon: Search,
   },
   {
     title: 'Saved Jobs',
     url: '/saved-jobs',
     icon: Bookmark,
+  },
+  {
+    title: 'Profile',
+    url: '/profile',
+    icon: User,
   },
 ];
 
@@ -46,7 +46,10 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className=" hover:bg-purple-700/20 hover:text-purple-700">
+                  <SidebarMenuButton
+                    asChild
+                    className=" hover:bg-purple-700/20 hover:text-purple-700"
+                  >
                     <a href={item.url}>
                       <item.icon />
                       <span>
