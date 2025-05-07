@@ -4,11 +4,13 @@ import { SearchIcon } from 'lucide-react';
 import SplitText from '../shared/SplitText';
 import { useState } from 'react';
 import { AutoComplete } from '../ui/autocomplete';
+import { Button } from '../ui/button';
+import { useRouter } from 'next/navigation';
 
 function Search() {
- // const router= useRouter();
   const [searchValue, setSearchValue] = useState<string>('');
   const [selectedValue, setSelectedValue] = useState<string>('');
+  const router = useRouter();
 
   const items = [
     { value: 'Software Engineer', label: 'Software Engineer' },
@@ -34,26 +36,34 @@ function Search() {
     role.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  const handleButtonClick = () => {
+     router.push(`/dashboard/search-results?search=${searchValue}`);
+
+  };
+
+
   return (
     <div className="flex flex-col justify-center w-full items-center min-h-160">
       <h1 className="text-3xl font-bold mb-4 tracking-wide">
         <SplitText text="Find your Dream Job"></SplitText>
       </h1>
       <div className="relative w-full max-w-2xl">
-          <AutoComplete
-            placeholder="Search for jobs roles..."
-            selectedValue={selectedValue}
-            onSelectedValueChange={setSelectedValue}
-            searchValue={searchValue}
-            onSearchValueChange={setSearchValue}
-            emptyMessage="No items."
-            isLoading={false}
-            items={filteredRoles}
-          />
+        <AutoComplete
+          placeholder="Search for jobs roles..."
+          selectedValue={selectedValue}
+          onSelectedValueChange={setSelectedValue}
+          searchValue={searchValue}
+          onSearchValueChange={setSearchValue}
+          emptyMessage="No items."
+          isLoading={false}
+          items={filteredRoles}
+        />
 
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground">
-          <SearchIcon />
-        </div>
+        <Button variant='ghost'   className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus-visible:ring-0" disabled = {searchValue === ''} onClick={() => {handleButtonClick()}}>
+          <div className="absolute right-3 top-1/3 -translate-y-1/2 h-7 w-4 text-muted-foreground ">
+            <SearchIcon />
+          </div>
+        </Button>
       </div>
     </div>
   );
