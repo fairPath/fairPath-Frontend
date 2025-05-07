@@ -1,56 +1,72 @@
-import FilterButton from "./filter-button"
+import FilterButton from './filter-button';
 
-
-const JobFilters = () => {
-  return (
-    <div className="flex flex-wrap gap-2 mt-4">
-  {/* Job Type Filter */}
-  
-  <FilterButton
-  title="Job Type"
-    options={['Full-Time', 'Part-Time', 'Contract', 'Internship']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select job type..."
-    />
-
-    <FilterButton
-    title = "Experience Level"
-    options={['Entry', 'Mid', 'Senior', 'Lead']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select experience level..."
-    />
-
-    <FilterButton
-    title = "Salary Range"
-    options={['$0 - $50k', '$50k - $100k', '$100k - $150k', '$150k+']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select salary range..."
-    />
-
-    <FilterButton
-    title = "Company"
-    options={['Google', 'Microsoft', 'Amazon', 'Facebook']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select company..."
-    />
-
-    <FilterButton
-    title = "Remote"
-    options={['Remote', 'On-Site', 'Hybrid']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select remote option..."
-    />
-
-    <FilterButton
-    title = "Diversity Score"
-    options={['1', '2', '3', '4', '5']}
-    onSelect={(value) => console.log(value)}
-    placeholder="Select minimum diversity score..."
-    />
-
-</div>
-
-  )
+interface JobFiltersProps {
+  jobTypeFilter: string;
+  setJobTypeFilter: (value: string) => void;
+  salaryFilter: string;
+  setSalaryFilter: (value: string) => void;
+  companyFilter: string;
+  setCompanyFilter: (value: string) => void;
+  diversityFilter: string;
+  setDiversityFilter: (value: string) => void;
 }
 
-export default JobFilters
+const JobFilters = ({
+  jobTypeFilter,
+  setJobTypeFilter,
+  salaryFilter,
+  setSalaryFilter,
+  companyFilter,
+  setCompanyFilter,
+  diversityFilter,
+  setDiversityFilter,
+}: JobFiltersProps) => {
+  return (
+    <div className="flex flex-wrap gap-2 mt-4">
+      {/* Job Type Filter */}
+
+      <FilterButton
+        title="Job Type"
+        options={['Full-Time', 'Part-Time', 'Contract']}
+        value={jobTypeFilter}
+        onSelect={(value) => setJobTypeFilter(value)}
+        placeholder="Select job type..."
+      />
+
+      <FilterButton
+        title="Salary"
+        options={[
+          '$40k+',
+          '$60k+',
+          '$80k+',
+          '$100k+',
+          '$120k+',
+          '$140k+',
+          '$160k+',
+          '$180k+',
+        ]}
+        value={salaryFilter}
+        onSelect={(value) => setSalaryFilter(value)}
+        placeholder="Select salary range..."
+      />
+
+      <FilterButton
+        title="Company"
+        options={['Google', 'Microsoft', 'Amazon', 'Facebook']}
+        onSelect={(value) => setCompanyFilter(value)}
+        value={companyFilter}
+        placeholder="Select company..."
+      />
+
+      <FilterButton
+        title="Diversity Score"
+        options={['1', '2', '3', '4', '5']}
+        onSelect={(value) => setDiversityFilter(value)}
+        value={diversityFilter}
+        placeholder="Select minimum diversity score..."
+      />
+    </div>
+  );
+};
+
+export default JobFilters;
