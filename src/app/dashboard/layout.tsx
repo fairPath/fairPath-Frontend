@@ -1,13 +1,21 @@
+'use client';
 import { AppSidebar } from '@/components/shared/app-sidebar';
 import Footer from '@/components/shared/Footer';
 import Navbar from '@/components/shared/Navbar';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+  const handleAboutClick = () => {
+    router.push('/dashboard/about');
+
+    
+  }
   return (
     <SidebarProvider>
    
@@ -19,7 +27,7 @@ export default function DashboardLayout({
         </div>
 
         <main className="flex-1 px-4 py-6 ">{children}</main>
-        <Footer />
+        <Footer handleAboutClick = {handleAboutClick} />
       </div>
     </SidebarProvider>
   );

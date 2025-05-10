@@ -23,7 +23,6 @@ const JobFilters = ({
 }: JobFiltersProps) => {
   return (
     <div className="flex flex-wrap gap-2 mt-4">
-      {/* Job Type Filter */}
 
       <FilterButton
         title="Job Type"

@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import { Button } from '../ui/button';
 import { Command, CommandInput, CommandList, CommandItem } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
@@ -16,8 +18,9 @@ const FilterButton = ({
   placeholder,
   value,
 }: FilterButtonProps) => {
+    const [open, setOpen] = useState(false);
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="text-sm hover:bg-purple-100 ">
           {value ? options.find((option) => option === value) : title}
@@ -32,6 +35,7 @@ const FilterButton = ({
                 key={type}
                 onSelect={(currentValue) => {
                   onSelect(currentValue === value ? '' : currentValue);
+                  setOpen(false); 
                 }}
               >
                 {type}
