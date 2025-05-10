@@ -1,554 +1,134 @@
-import { Job } from "@/types/Job";
+import { Job } from '@/types/Job';
 
- export const mockData: Job[] = [
-    {
-        "title": "Electronics Engineer",
-        "companyName": "Leidos",
-        "dateCreated": "2025-05-07T14:21:30Z",
-        "location": "Rochdale Village, Queens, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5186487536?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=16005AF59E4FA267F1BD13B55E43A389CCEF153A",
-        "jobDescription": "Description Leidos is seeking an Electronics Engineer to join the National Airspace System Integration Support Contract (NISC IV) team. This role can be located in the College Park, GA area OR the Jamaica NY area. Includes up to 25% travel. In this role you will support the Federal Aviation Administration's (FAA) Eastern Service Area (ESA) performing electronics design engineering, cost estimating, scheduling, coordinating, inspecting, and acceptance and reporting project progress and issues ag…",
-        "salaryMin": 92698.81,
-        "salaryMax": 92693.81,
-        "rating": null
-    },
-    {
-        "title": "Electronics Engineer",
-        "companyName": "Leidos",
-        "dateCreated": "2025-05-07T14:21:29Z",
-        "location": "Rochdale Village, Queens, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5186487481?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=32B585C6D8D9B89153D2C5E7884CEBA4A6CC08BD",
-        "jobDescription": "Description Leidos is seeking a Senior Electronics Engineer to join the National Airspace System Integration Support Contract (NISC IV) team. In this role you will support the Federal Aviation Administration's (FAA) Eastern Service Area (ESA) supporting the implementation of critical power systems in air traffic control facilities over the geographic scope of the ESA. This role can be located in the College Park, GA area OR the Jamaica NY area. Includes up to 25% travel. Electronics Engineer Pr…",
-        "salaryMin": 111923.22,
-        "salaryMax": 111913.22,
-        "rating": null
-    },
-    {
-        "title": "Process Engineer",
-        "companyName": "Sazerac Company",
-        "dateCreated": "2025-05-01T00:51:56Z",
-        "location": "Meadows, Hudson County, New Jersey US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5171841935?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=D36F7992C2B74906E146F390C1ECD8F3CB62F66C",
-        "jobDescription": "Job Description/Responsibilities: The Process Engineer is responsible for the overall direction, coordination, implementation, execution, control and completion of specific projects and reliability related activities for the Processing Department, applying engineering principles while striving to improve quality, productivity, and waste, while ensuring consistency with company strategy, commitments and goals. Assist in identifying and planning of annual capital projects within the department. S…",
-        "salaryMin": 93162.85,
-        "salaryMax": 93662.85,
-        "rating": null
-    },
-    {
-        "title": "Value Engineer",
-        "companyName": "Sazerac Company",
-        "dateCreated": "2025-05-01T00:51:56Z",
-        "location": "Meadows, Hudson County, New Jersey US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5171841869?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=1525A4425AAF65AA8B3B24925657754CD07DB03E",
-        "jobDescription": "Job Description/Responsibilities: As the global lead of Value Engineering, you will be responsible for driving efforts to identify and evaluate the opportunity costs related to value engineering for raw and packaging materials, while adding value to the product by reducing costs and improving the sustainability footprint. This will be achieved through substituting existing materials with alternative ones, working within the current specification range of materials, using different and new metho…",
-        "salaryMin": 89028.54,
-        "salaryMax": 89728.54,
-        "rating": null
-    },
-    {
-        "title": "Office Engineer",
-        "companyName": "The LiRo Group",
-        "dateCreated": "2025-05-03T14:26:42Z",
-        "location": "Grand Central, Manhattan, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5179115368?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=C487D12C8F57F113697086B40FE3F1A86331A873",
-        "jobDescription": "Office Engineer US-NY-New York Job ID: 2025-3079 Type: Regular Full-Time  of Openings: 1 Category: Administrative/Clerical The LiRo Group Overview We are seeking a highly organized and detail-oriented Office Engineer with experience in recruiting to join our team . The ideal candidate will have a strong background in engineering and construction management processes, project coordination, and recruitment. This role combines technical expertise in office engineering with the ability to manage th…",
-        "salaryMin": 117094.36,
-        "salaryMax": 117094.36,
-        "rating": null
-    },
-    {
-        "title": "Operational Excellence Lead Engineer",
-        "companyName": "Sazerac Company",
-        "dateCreated": "2025-05-01T00:51:58Z",
-        "location": "Meadows, Hudson County, New Jersey US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5171842158?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=8914E2574F6ACD379CDFB2CA9A86CAD4666A060B",
-        "jobDescription": "Job Description/Responsibilities: As the Operational Excellence Lead, you will be responsible for deploying a structured performance management system and driving focused improvements, which serve as a foundational element of the company’s Operational Excellence philosophy. You will play a key role in deploying standardized work areas, workflows, and visual management systems. This role will span across all operations functions and global markets within the integrated supply chain. Integrate th…",
-        "salaryMin": 143677.73,
-        "salaryMax": 147677.73,
-        "rating": null
-    },
-    {
-        "title": "Lead Android Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T13:07:16Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5176606167?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=38FA98DB3DEB59B8EA1E3C653E00C2234271CCCC",
-        "jobDescription": "Lead Android Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. As a Capital One Android Software Engineer , you’ll have the opportunity to be on the forefront of driving a major transformation within Ca…",
-        "salaryMin": 171058.16,
-        "salaryMax": 1710758.16,
-        "rating": null
-    },
-    {
-        "title": "Lead Data Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:48Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930692?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=E63BF8987DC5608791B52829874890119330CC0B",
-        "jobDescription": "Lead Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead Data Engineer, you’ll have the …",
-        "salaryMin": 125549.05,
-        "salaryMax": 125579.05,
-        "rating": null
-    },
-    {
-        "title": "Lead Data Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930834?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=8D11C78EDDF223D51134BB7822D8E5A4DBE01CDB",
-        "jobDescription": "Lead Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead Data Engineer, you’ll have the …",
-        "salaryMin": 119348.05,
-        "salaryMax": 119348.05,
-        "rating": null
-    },
-    {
-        "title": "Manager, Software Engineering",
-        "companyName": "Capital One",
-        "dateCreated": "2025-04-30T22:45:27Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5171679414?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=7F2A1A9F6C27BC295E6B33D624087FA5B28DF9C7",
-        "jobDescription": "Manager, Software Engineering Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. We are seeking Back End Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Soft…",
-        "salaryMin": 145766.88,
-        "salaryMax": 145766.88,
-        "rating": null
-    },
-    {
-        "title": "Lead Data Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:48Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930674?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=ABFCF727874F98041BB059D45F17D170D23FC860",
-        "jobDescription": "Lead Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead Data Engineer, you’ll have the …",
-        "salaryMin": 115157.45,
-        "salaryMax": 115157.45,
-        "rating": null
-    },
-    {
-        "title": "Senior AI Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-04-30T13:44:29Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5170956004?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=55BE6FF00E15CA9ABD0408F78685F46D6B92C60D",
-        "jobDescription": "Senior AI Engineer Overview: At Capital One, we are creating responsible and reliable AI systems, changing banking for good. For years, Capital One has been an industry leader in using machine learning to create real-time, personalized customer experiences. Our investments in technology infrastructure and world-class talent — along with our deep experience in machine learning — position us to be at the forefront of enterprises leveraging AI. From informing customers about unusual charges to ans…",
-        "salaryMin": 180896.02,
-        "salaryMax": 180896.02,
-        "rating": null
-    },
-    {
-        "title": "Lead AI Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-04-30T11:43:18Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5170762183?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=8F9B7451051B777A0B8A33AC239339C57E762CAE",
-        "jobDescription": "Lead AI Engineer Overview: At Capital One, we are creating responsible and reliable AI systems, changing banking for good. For years, Capital One has been an industry leader in using machine learning to create real-time, personalized customer experiences. Our investments in technology infrastructure and world-class talent — along with our deep experience in machine learning — position us to be at the forefront of enterprises leveraging AI. From informing customers about unusual charges to answe…",
-        "salaryMin": 150886.05,
-        "salaryMax": 150886.05,
-        "rating": null
-    },
-    {
-        "title": "Software Engineer",
-        "companyName": "Winston Support Services",
-        "dateCreated": "2025-05-01T11:13:52Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5173197559?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=0900CAD1CF914F1CC81B6C7EC7D6FC3FD8EAF32D",
-        "jobDescription": "Job Description Job Description Software Engineer Insurance industry firm seeks software engineer Design, test and implement software and applications. Enhance application that supports policy, billing and claims 2 years .NET exp Experience working with a Policy Administration System( Duck Creek, MGS, Concept One, Guidewire) Full knowledge web services (SOAP, WSDL, WINDOWS) SDLC( Waterfall and Agile) ASP.NET, C#, SQL",
-        "salaryMin": 124518.81,
-        "salaryMax": 124518.81,
-        "rating": null
-    },
-    {
-        "title": "Lead Software Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T00:54:49Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5175299829?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=DC95C2198EA98F4F21A1DF77E6AD90CBD38227E0",
-        "jobDescription": "Lead Software Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. We are seeking Back End Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Software En…",
-        "salaryMin": 118846.94,
-        "salaryMax": 118846.94,
-        "rating": null
-    },
-    {
-        "title": "Senior Data Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:49Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930735?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=29C0363FE517F1A4C7D50468C81AD1DAE0327D2D",
-        "jobDescription": "Senior Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Data Engineer, you’ll have the opp…",
-        "salaryMin": 138613.28,
-        "salaryMax": 138613.28,
-        "rating": null
-    },
-    {
-        "title": "Sr. AI Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T13:07:16Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5176606169?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=25730B2E74007AE727E9F4FA807B58E4FCF264C4",
-        "jobDescription": "Sr. AI Engineer At Capital One, we are creating responsible and reliable AI systems, changing banking for good. For years, Capital One has been an industry leader in using machine learning to create real-time, personalized customer experiences. Our investments in technology infrastructure and world-class talent — along with our deep experience in machine learning — position us to be at the forefront of enterprises leveraging AI. From informing customers about unusual charges to answering their …",
-        "salaryMin": 187637.69,
-        "salaryMax": 187637.69,
-        "rating": null
-    },
-    {
-        "title": "Senior, Software Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T13:07:16Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5176606154?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=FD1D8E6F5F1CE304D01E79F010C0BB47A2B05D21",
-        "jobDescription": "Senior, Software Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. We are seeking Back End Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Software…",
-        "salaryMin": 146546.17,
-        "salaryMax": 146546.17,
-        "rating": null
-    },
-    {
-        "title": "Senior Engineer",
-        "companyName": "SUMITOMO MITSUI TRUST BANK, LIMITED",
-        "dateCreated": "2025-05-02T01:15:57Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5175387140?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=E1485D3A36333AD84BF0AA550AD1C4E5C64C221C",
-        "jobDescription": "Job Description Job Description This role is located in New York City and will require a hybrid work schedule of at least 2 days in office per week. About the Bank: Sumitomo Mitsui Trust Bank, Limited was established through the merger of The Sumitomo Trust and Banking Co., Ltd with Chuo Mitsui Trust and Banking, Ltd. on April 1, 2012. We are one of the largest asset managers in Asia and number one among Japanese financial institutions by AUM, with approximately $850 Billion USD in AUM. The Ban…",
-        "salaryMin": 128523.54,
-        "salaryMax": 128523.54,
-        "rating": null
-    },
-    {
-        "title": "Growth Engineer",
-        "companyName": "Arthur",
-        "dateCreated": "2025-04-30T01:09:20Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5169945806?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=61048B5EB22FCFBE37F6E4DFB080126C2C345A60",
-        "jobDescription": "Job Description Job Description Arthur is looking for a Growth Engineer who will work internally with our teams to build excitement for Arthur's suite of products with developers and technical users. In this role, you will use your expertise to help guide Arthur users through the user experience from acquisition to continuous engagement. What you'll do Develop communication strategy by building, maintaining and contributing to open-source projects, writing blog content, hosting webinars, attend…",
-        "salaryMin": 155167.58,
-        "salaryMax": 155167.58,
-        "rating": null
-    },
-    {
-        "title": "Quality Engineer",
-        "companyName": "Knowles Corporation",
-        "dateCreated": "2025-05-07T01:35:37Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5184612135?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=478BE8568A2045E3287F0C8417FA0037F64EBE77",
-        "jobDescription": "Job Description Job Description Description The Quality Engineer is responsible for ensuring consistent application of quality techniques, providing statistical information for quality improvement, and investigating, analyzing, and resolving quality problems. Key Responsibilities Review customer quotes and orders to ensure compliance to quality requirements. Provide statistical analysis of processes using applicable data/statistics, quality tools, and software. Identify and record problems rela…",
-        "salaryMin": 90304.28,
-        "salaryMax": 90304.28,
-        "rating": null
-    },
-    {
-        "title": "Civil Engineer",
-        "companyName": "The Falcon Group",
-        "dateCreated": "2025-04-25T12:40:34Z",
-        "location": "Jersey City, Hudson County, New Jersey US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5162435296?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=697EE547155B4E76515794427FDD010C6939BDFD",
-        "jobDescription": "Job Description Job Description Who We Are For nearly three decades, The Falcon Group’s mission has been to understand our client’s variety of needs, while keeping to their anticipated budget and exceeding their desired results. The Falcon Group’s services include Architectural, Civil, Structural, Construction Administration, Owner's Rep, MEP Services, and much more. The Team Here at The Falcon Group, with 180 experts, we have made it our mission to deliver exceptional customer service to our d…",
-        "salaryMin": 90111.23,
-        "salaryMax": 90111.23,
-        "rating": null
-    },
-    {
-        "title": "Senior Engineer",
-        "companyName": "Axiom Software Solutions Limited",
-        "dateCreated": "2025-04-18T11:53:31Z",
-        "location": "Jersey City, Hudson County, New Jersey US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5151762852?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=A3CEAAFD0A5EAD85EA53DD0DC71198AB6F2AA8E7",
-        "jobDescription": "Job Description Job Description Role Name: Senior Engineer Location: / United States (Remote Work) JOB DESCRIPTION: Senior Engineer for Patching is responsible for managing and optimizing the patch management process using Tanium. This role involves ensuring the security, compliance, and efficiency of systems across the organization by implementing and maintaining effective patch management strategies. Key Responsibilities: • Manage and optimize the patch management process using Tanium. • Conf…",
-        "salaryMin": 115953.66,
-        "salaryMax": 115953.66,
-        "rating": null
-    },
-    {
-        "title": "Geotechnical Engineer",
-        "companyName": "mcfa",
-        "dateCreated": "2025-04-20T12:17:26Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5154472178?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=FEA2CB2660206C9EEE5E7703DBDBE5B9366AB982",
-        "jobDescription": "Job Description Job Description Salary: $80,000-$85,000 annual base salary DOE About the Role: We are seeking a dedicated and skilled Geotechnical Engineer to join our growing Transportation and Infrastructure division. In this role, you will be responsible for sampling, inspecting, testing, and condition services of construction materials that are either existing or under construction at various Port Authority of New York and New Jersey (PANYNJ) facilities. Work schedule varies according to jo…",
-        "salaryMin": 108557.84,
-        "salaryMax": 108557.84,
-        "rating": null
-    },
-    {
-        "title": "Senior Engineer",
-        "companyName": "SUMITOMO MITSUI TRUST BANK, LIMITED",
-        "dateCreated": "2025-04-19T00:08:03Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5152665492?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=14E55410FA1976444613BBA3A02232A101FB305F",
-        "jobDescription": "Job Description Job Description This role is located in New York City and will require a hybrid work schedule of at least 2 days in office per week. About the Bank: Sumitomo Mitsui Trust Bank, Limited was established through the merger of The Sumitomo Trust and Banking Co., Ltd with Chuo Mitsui Trust and Banking, Ltd. on April 1, 2012. We are one of the largest asset managers in Asia and number one among Japanese financial institutions by AUM, with approximately $850 Billion USD in AUM. The Ban…",
-        "salaryMin": 141309.86,
-        "salaryMax": 141309.86,
-        "rating": null
-    },
-    {
-        "title": "Blockchain Engineer",
-        "companyName": "Career Renew",
-        "dateCreated": "2025-04-10T02:14:36Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5138383160?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=2E2DD55C7A7E8FA04095740515011EDCC08BCE50",
-        "jobDescription": "Job Description Job Description Career Renew is recruiting for one of its clients a Blockchain Engineer - this is a fully remote job, but candidates need to be based on the East Coast US or Europe. We offer a single unified platform for fast, secure, and cost-effective cross-border payments. Platforms can plug into our payments API, use our dashboard, or OTC desk to send and receive payments for their customers. We are also building a cross-chain DEX aggregator initially focused on stablecoin a…",
-        "salaryMin": 115293.16,
-        "salaryMax": 115293.16,
-        "rating": null
-    },
-    {
-        "title": "Associate, Engineering",
-        "companyName": "Aspen Power Partners LLC",
-        "dateCreated": "2025-05-04T13:30:18Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5180332375?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=3454F4DB9858C5FC686CB9B875723C046DF6B24C",
-        "jobDescription": "Job Description Job Description About Aspen Power Aspen Power is a distributed energy generation platform with the dual mission of accelerating and democratizing decarbonization. We partner with businesses, communities, and others in the industry to develop, construct, and operate renewable energy assets. Our experienced team is passionate about solving our clients’ energy challenges to deliver a sustainable future throughout the U.S. For more information, please visit aspenpower.com. Position …",
-        "salaryMin": 72083.14,
-        "salaryMax": 72083.14,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer - Fraud Tech",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930835?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=DC41B298483A90D5DA710208C5FECD6D4F5E2AE3",
-        "jobDescription": "Distinguished Engineer - Fraud Tech At Capital One, we believe in the values of Excellence and Doing the Right Thing. We are a technology-oriented company delivering financial products to market through modern technology and constant innovation at a massive scale. Distinguished Engineers are: Deep technical experts and thought leaders that help accelerate adoption of the very best engineering practices, while maintaining knowledge on industry innovations, trends and practices Visionaries, colla…",
-        "salaryMin": 191916.73,
-        "salaryMax": 191916.73,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer, Data Architect",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930920?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=7C6109DFE02A82D60871F79962BAE4295B234F85",
-        "jobDescription": "Distinguished Engineer, Data Architect Capital One is looking for a Distinguished Engineer with extensive experience in data engineering, data architecture and data modeling to drive the design and implementation of a high performance data ecosystem that supports real-time, intelligent experiences to enable our Risk Management functions. In this role, you will help shape the Risk Management Data domains that will drive our journey towards standardized data assets and data products. Distinguishe…",
-        "salaryMin": 188167.58,
-        "salaryMax": 188167.58,
-        "rating": null
-    },
-    {
-        "title": "Senior Machine Learning Engineer",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930918?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=C9BCB739819FECFA11634BC79CA37F16AEA45B56",
-        "jobDescription": "Senior Machine Learning Engineer As a Capital One Machine Learning Engineer (MLE) , you'll be part of an Agile team dedicated to productionizing machine learning applications and systems at scale. You’ll participate in the detailed technical design, development, and implementation of machine learning applications using existing and emerging technology platforms. You’ll focus on machine learning architectural design, develop and review model and application code, and ensure high availability and…",
-        "salaryMin": 159549.16,
-        "salaryMax": 159549.16,
-        "rating": null
-    },
-    {
-        "title": "Sr. Manager, Data Engineering",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-07T07:26:44Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5185079926?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=1D22D4ED2162A02B2C55826CABFE0661CCB49A97",
-        "jobDescription": "Sr. Manager, Data Engineering Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Senior Manager Data Engin…",
-        "salaryMin": 159424.28,
-        "salaryMax": 159424.28,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer - Finance Technology",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930913?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=F6F119EF51DED6F1F20A8D6D1AA986FB77C4619D",
-        "jobDescription": "Distinguished Engineer - Finance Technology At Capital One, we believe in the values of Excellence and Doing the Right Thing. We are a technology-oriented company delivering financial products to market through modern technology and constant innovation at a massive scale. Distinguished Engineers are: Deep technical experts and thought leaders that help accelerate adoption of the very best engineering practices, while maintaining knowledge on industry innovations, trends and practices Visionarie…",
-        "salaryMin": 193073.45,
-        "salaryMax": 193073.45,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer - Network Security",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:49Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930805?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=0A9347AE4E4BD66146501BD2A3D5EED8722357BF",
-        "jobDescription": "Distinguished Engineer - Network Security As a Distinguished Engineer at Capital One, you will be a part of a community of technical experts working to define the future of banking in the cloud. You will work alongside our talented team of developers, machine learning experts, product managers and people leaders. Our Distinguished Engineers are leading experts in their domains, helping devise practical and reusable solutions to complex problems. You will drive innovation at multiple levels, hel…",
-        "salaryMin": 193605.2,
-        "salaryMax": 193605.2,
-        "rating": null
-    },
-    {
-        "title": "Lead Software Engineer, iOS",
-        "companyName": "Capital One",
-        "dateCreated": "2025-04-30T22:45:27Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5171679413?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=791E7D246887BDF2408A681308E8671E645B6593",
-        "jobDescription": "Lead Software Engineer, iOS Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. As a Capital One iOS Software Engineer, you’ll have the opportunity to be on the forefront of driving a major transformation within C…",
-        "salaryMin": 178103.88,
-        "salaryMax": 178103.88,
-        "rating": null
-    },
-    {
-        "title": "Lead Software Engineer, Python",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:48Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930643?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=0E24B05171B09874D7F6BC5EED760DAE4E062EE2",
-        "jobDescription": "114 5th Ave (22114), United States of America, New York, New York Lead Software Engineer, Python Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Full Stack Software Engineers who are passionate about ma…",
-        "salaryMin": 107780.96,
-        "salaryMax": 107780.96,
-        "rating": null
-    },
-    {
-        "title": "Lead Software Engineer",
-        "companyName": "Yoh, A Day & Zimmermann Company",
-        "dateCreated": "2025-04-29T11:37:31Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5168812985?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=201EF8DA686485347BF2F5ACCEFCA786C8B6CA1A",
-        "jobDescription": "Job Description Job Description Yoh has an exciting direct hire opportunity for a highly skilled Lead Software Engineer to join our team. The ideal candidate will have extensive experience in deploying and managing applications on AWS and other cloud platforms, and a strong background in various software frameworks. Title: Lead Software Engineer Compensation: $160,000 - $180,000 (DOE)  bonus Type: Direct Hire, Hybrid Location: Three days a week in New York, NY, Holmdel, NJ, or Bethlehem, PA Ind…",
-        "salaryMin": 179256.47,
-        "salaryMax": 179256.47,
-        "rating": null
-    },
-    {
-        "title": "Senior Software Engineer",
-        "companyName": "Robert Half",
-        "dateCreated": "2025-05-07T07:42:31Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5185088024?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=7554FA48EC96947C6A86DADD085AC2C095F64E7C",
-        "jobDescription": "Job Description Job Description We are looking for a Senior Software Engineer to join our team in New York, NY. In this role, you will lead the development of innovative software solutions that support commerce lifecycle capabilities, empowering both client and internal teams. This is a long-term contract position offering a unique opportunity to work on cutting-edge systems in a collaborative and fast-paced environment. Responsibilities: • Design and implement scalable microservices and API la…",
-        "salaryMin": 176800.0,
-        "salaryMax": 187200.0,
-        "rating": null
-    },
-    {
-        "title": "Senior DevOps Engineer / Site Reliability Engineer",
-        "companyName": "The Greene Group",
-        "dateCreated": "2025-04-16T11:21:26Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5147483894?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=E8AFF8731C68CEFBF24F9715CAFE5C48141A3528",
-        "jobDescription": "Job Description Job Description A major financial services company in NYC is growing its team rapidly, and they are looking for a Senior DevOps Engineer / Site Reliability Engineer who can join. If you’re passionate about high-availability, reliability, automation, we’d be excited to talk to you. Some technologies we are currently using: Linux, Docker, Terraform, Ansible, Java, Spring Boot, PostgreSQL, RabbitMQ, Keycloak, HAProxy, ELK Stack, InfluxDB, Telegraf, Grafana, Jenkins, Nexus, SonarQub…",
-        "salaryMin": 103491.92,
-        "salaryMax": 103491.92,
-        "rating": null
-    },
-    {
-        "title": "Lead, Test/Design Verification Engineer, Advanced Product Ventures",
-        "companyName": "NIKE",
-        "dateCreated": "2025-05-03T02:27:27Z",
-        "location": "Grand Central, Manhattan, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5178020243?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=962A5CCAB82AD1C8E1E8D673C15C8FAA4648B597",
-        "jobDescription": "WHO YOU WILL WORK WITH You will work closely with the GM, Product lead, Nike Sports Research Lab lead, Engineering and Design teams, Program Management and Finance, to bring safe and reliable products to market. You will work across the Nike matrix to build support from product testing functions across the company. WHO WE ARE LOOKING FOR We are looking for a Test/Design Verification Engineering Lead to join a newly formed team developing innovative, powered athlete products. WHAT YOU BRING Bach…",
-        "salaryMin": 114069.88,
-        "salaryMax": 114069.88,
-        "rating": null
-    },
-    {
-        "title": "Lead Software Engineer, Fullstack",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T13:07:16Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5176606183?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=FB5229A20DD8274DABDAD55EC738248A8CF7703E",
-        "jobDescription": "Lead Software Engineer, Fullstack Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Full Stack Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead S…",
-        "salaryMin": 128112.98,
-        "salaryMax": 128112.98,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer (Solutions Architect)",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:51Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930988?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=3068DE5DC7824FED3B7E3C7A81835312389DC41F",
-        "jobDescription": "Distinguished Engineer (Solutions Architect) In Risk Tech, we provide the foundation for Capital One to thrive in an uncertain world. Our engaged, empowered, and intelligent people produce outstanding products, working toward the common goal of transforming risk management with technology. We build data-driven tools that use machine learning to prevent risks & automatically detect issues before they impact our business, our customers, or our communities. In this role, you will define the archit…",
-        "salaryMin": 218294.44,
-        "salaryMax": 218294.44,
-        "rating": null
-    },
-    {
-        "title": "Distinguished Engineer - Card Decisioning",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:49Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930761?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=11F18BA32EE3E954481449573E2DFFD4837F870A",
-        "jobDescription": "Distinguished Engineer - Card Decisioning As a Distinguished Engineer at Capital One, you will be a part of a community of technical experts working to define the future of banking in the cloud. You will work alongside our talented team of developers, machine learning experts, product managers and people leaders. Our Distinguished Engineers are leading experts in their domains, helping devise practical and reusable solutions to complex problems. You will drive innovation at multiple levels, hel…",
-        "salaryMin": 181276.64,
-        "salaryMax": 181276.64,
-        "rating": null
-    },
-    {
-        "title": "Telecom Engineer",
-        "companyName": "NYC IT Inc",
-        "dateCreated": "2025-04-26T11:46:29Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5164292960?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=0008CB8C2451E363C97F47ED1D26C56F0575FC40",
-        "jobDescription": "Job Description Job Description Mandatory Requirements: Preferably 5 years of hands-on experience as Telecom Engineer managing telecom services Working knowledge of Microsoft Windows 10, Office 365/Exchange online, Browsers, MS Visio, and Project Experience with Verizon Enterprise Direct, Verizon CMAC, VMM, Interactive Voice Response Systems, Cisco Hosted Collaboration Solution (HCS) Working experience in recognizing and resolving Telecom (hardware, software, application) problems Must have goo…",
-        "salaryMin": 65908.55,
-        "salaryMax": 65908.55,
-        "rating": null
-    },
-    {
-        "title": "Mechanical Engineer",
-        "companyName": "Smith Engineering",
-        "dateCreated": "2025-05-02T01:13:26Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5175373183?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=809847C597BFEAC0D0BA71014D75B2DB1CD0B1FD",
-        "jobDescription": "Job Description Job Description Smith Engineering PLLC and BEP Analytics LLC are consulting engineering and Building Automation System companies focused on energy reduction, infrastructure upgrade/improvements, and operations optimization of critical facilities. As we expand, we’re looking for a Mechanical Engineer to join our team and play a key role in installing BAS systems and maintaining BAS systems and updating/fixing BAS systems and issues for our customers. Position Overview: As a Mecha…",
-        "salaryMin": 67116.19,
-        "salaryMax": 67116.19,
-        "rating": null
-    },
-    {
-        "title": "HVAC Engineer",
-        "companyName": "Northern Wolves Inc",
-        "dateCreated": "2025-04-17T11:25:50Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5149788169?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=AAFA2ACB12AA8345791E98A4D073BD9B5B9B7BB3",
-        "jobDescription": "Job Description Job Description Are you ready to unleash your creativity and technical skills? Northern Wolves Inc is searching for a talented HVAC Engineer, Drafter to join our dynamic team! As an HVAC Engineer, Drafter, you will play a crucial role in transforming innovative design concepts into practical, functional HVAC systems that enhance comfort and efficiency. You will collaborate with engineers, architects, and project managers to create detailed drawings and specifications for HVAC in…",
-        "salaryMin": 94240.09,
-        "salaryMax": 94240.09,
-        "rating": null
-    },
-    {
-        "title": "Director, Software Engineering - SRE",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:51Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182931007?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=2D91E63C42D1EE27C6F65CB25EB89287388019BB",
-        "jobDescription": "Director, Software Engineering - SRE As a Capital One Director of Software Engineering, you'll work on everything from customer-facing web and mobile applications using cutting-edge open source frameworks, to highly-available RESTful microservices, to back-end Java based systems and Machine learning models using the hottest techniques in Big Data. You'll bring solid experience in emerging and traditional technologies such as: node.js, Java, GO, AngularJS, React, Python, REST, JSON, XML, Ruby, P…",
-        "salaryMin": 172102.95,
-        "salaryMax": 172102.95,
-        "rating": null
-    },
-    {
-        "title": "Sr. Software Engineer (full stack)",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-02T13:07:16Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5176606156?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=871433ECF47E907CC0866A1917E2420644741DB8",
-        "jobDescription": "Sr. Software Engineer (full stack) Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Front-End Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Softwa…",
-        "salaryMin": 142660.27,
-        "salaryMax": 142660.27,
-        "rating": null
-    },
-    {
-        "title": "Senior Manager, Machine Learning Engineering",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-07T07:26:44Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5185079924?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=69FBF0532954903EAC19A1921EE08B3B782C0A7A",
-        "jobDescription": "Senior Manager, Machine Learning Engineering As a Capital One Machine Learning Engineer (MLE), you'll be part of an Agile team dedicated to productionizing machine learning applications and systems at scale. You’ll participate in the detailed technical design, development, and implementation of machine learning applications using existing and emerging technology platforms. You’ll focus on machine learning architectural design, develop and review model and application code, and ensure high avail…",
-        "salaryMin": 167624.22,
-        "salaryMax": 167624.22,
-        "rating": null
-    },
-    {
-        "title": "Senior Software Engineer, Full Stack",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:48Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930678?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=0DEE79FB202C8F5B6D9EA1577394B2DB6D1DD5C5",
-        "jobDescription": "Center 1 (19052), United States of America, McLean, Virginia Senior Software Engineer, Full Stack Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Full Stack Software Engineers who are passionate about m…",
-        "salaryMin": 139167.75,
-        "salaryMax": 139167.75,
-        "rating": null
-    },
-    {
-        "title": "Senior Software Engineer, Full Stack",
-        "companyName": "Capital One",
-        "dateCreated": "2025-05-06T07:21:48Z",
-        "location": "New York City, New York, New York US",
-        "redirectUrl": "https://www.adzuna.com/land/ad/5182930632?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=CEE776B0B5F9A0D636A0A590560A27BF7850A601",
-        "jobDescription": "Senior Software Engineer, Full Stack Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Full Stack Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Sof…",
-        "salaryMin": 134643.36,
-        "salaryMax": 134643.36,
-        "rating": null
-    }
-]
+export const mockData: Job[] = [
+  {
+    title: 'Electronics Engineer',
+    companyName: 'Leidos',
+    dateCreated: '2025-05-07T14:21:30Z',
+    location: 'Rochdale Village, Queens, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5186487536?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=16005AF59E4FA267F1BD13B55E43A389CCEF153A',
+    jobDescription:
+      "Description Leidos is seeking an Electronics Engineer to join the National Airspace System Integration Support Contract (NISC IV) team. This role can be located in the College Park, GA area OR the Jamaica NY area. Includes up to 25% travel. In this role you will support the Federal Aviation Administration's (FAA) Eastern Service Area (ESA) performing electronics design engineering, cost estimating, scheduling, coordinating, inspecting, and acceptance and reporting project progress and issues ag…",
+    salaryMin: 92698.81,
+    salaryMax: 92693.81,
+    rating: 1,
+  },
+  {
+    title: 'Electronics Engineer',
+    companyName: 'Leidos',
+    dateCreated: '2025-05-07T14:21:29Z',
+    location: 'Rochdale Village, Queens, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5186487481?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=32B585C6D8D9B89153D2C5E7884CEBA4A6CC08BD',
+    jobDescription:
+      "Description Leidos is seeking a Senior Electronics Engineer to join the National Airspace System Integration Support Contract (NISC IV) team. In this role you will support the Federal Aviation Administration's (FAA) Eastern Service Area (ESA) supporting the implementation of critical power systems in air traffic control facilities over the geographic scope of the ESA. This role can be located in the College Park, GA area OR the Jamaica NY area. Includes up to 25% travel. Electronics Engineer Pr…",
+    salaryMin: 111923.22,
+    salaryMax: 111913.22,
+    rating: 3,
+  },
+  {
+    title: 'Process Engineer',
+    companyName: 'Sazerac Company',
+    dateCreated: '2025-05-01T00:51:56Z',
+    location: 'Meadows, Hudson County, New Jersey US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5171841935?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=D36F7992C2B74906E146F390C1ECD8F3CB62F66C',
+    jobDescription:
+      'Job Description/Responsibilities: The Process Engineer is responsible for the overall direction, coordination, implementation, execution, control and completion of specific projects and reliability related activities for the Processing Department, applying engineering principles while striving to improve quality, productivity, and waste, while ensuring consistency with company strategy, commitments and goals. Assist in identifying and planning of annual capital projects within the department. S…',
+    salaryMin: 93162.85,
+    salaryMax: 93662.85,
+    rating: 6,
+  },
+  {
+    title: 'Value Engineer',
+    companyName: 'Sazerac Company',
+    dateCreated: '2025-05-01T00:51:56Z',
+    location: 'Meadows, Hudson County, New Jersey US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5171841869?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=1525A4425AAF65AA8B3B24925657754CD07DB03E',
+    jobDescription:
+      'Job Description/Responsibilities: As the global lead of Value Engineering, you will be responsible for driving efforts to identify and evaluate the opportunity costs related to value engineering for raw and packaging materials, while adding value to the product by reducing costs and improving the sustainability footprint. This will be achieved through substituting existing materials with alternative ones, working within the current specification range of materials, using different and new metho…',
+    salaryMin: 89028.54,
+    salaryMax: 89728.54,
+    rating: 0,
+  },
+  {
+    title: 'Office Engineer',
+    companyName: 'The LiRo Group',
+    dateCreated: '2025-05-03T14:26:42Z',
+    location: 'Grand Central, Manhattan, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5179115368?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=C487D12C8F57F113697086B40FE3F1A86331A873',
+    jobDescription:
+      'Office Engineer US-NY-New York Job ID: 2025-3079 Type: Regular Full-Time  of Openings: 1 Category: Administrative/Clerical The LiRo Group Overview We are seeking a highly organized and detail-oriented Office Engineer with experience in recruiting to join our team . The ideal candidate will have a strong background in engineering and construction management processes, project coordination, and recruitment. This role combines technical expertise in office engineering with the ability to manage th…',
+    salaryMin: 117094.36,
+    salaryMax: 117094.36,
+    rating: 5,
+  },
+  {
+    title: 'Operational Excellence Lead Engineer',
+    companyName: 'Sazerac Company',
+    dateCreated: '2025-05-01T00:51:58Z',
+    location: 'Meadows, Hudson County, New Jersey US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5171842158?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=8914E2574F6ACD379CDFB2CA9A86CAD4666A060B',
+    jobDescription:
+      'Job Description/Responsibilities: As the Operational Excellence Lead, you will be responsible for deploying a structured performance management system and driving focused improvements, which serve as a foundational element of the company’s Operational Excellence philosophy. You will play a key role in deploying standardized work areas, workflows, and visual management systems. This role will span across all operations functions and global markets within the integrated supply chain. Integrate th…',
+    salaryMin: 143677.73,
+    salaryMax: 147677.73,
+    rating: 0,
+  },
+  {
+    title: 'Lead Android Engineer',
+    companyName: 'Capital One',
+    dateCreated: '2025-05-02T13:07:16Z',
+    location: 'New York City, New York, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5176606167?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=38FA98DB3DEB59B8EA1E3C653E00C2234271CCCC',
+    jobDescription:
+      "Lead Android Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. As a Capital One Android Software Engineer , you’ll have the opportunity to be on the forefront of driving a major transformation within Ca…",
+    salaryMin: 171058.16,
+    salaryMax: 1710758.16,
+    rating: 1,
+  },
+  {
+    title: 'Lead Data Engineer',
+    companyName: 'Capital One',
+    dateCreated: '2025-05-06T07:21:48Z',
+    location: 'New York City, New York, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5182930692?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=E63BF8987DC5608791B52829874890119330CC0B',
+    jobDescription:
+      "Lead Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead Data Engineer, you’ll have the …",
+    salaryMin: 125549.05,
+    salaryMax: 125579.05,
+    rating: 3,
+  },
+  {
+    title: 'Lead Data Engineer',
+    companyName: 'Capital One',
+    dateCreated: '2025-05-06T07:21:50Z',
+    location: 'New York City, New York, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5182930834?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=8D11C78EDDF223D51134BB7822D8E5A4DBE01CDB',
+    jobDescription:
+      "Lead Data Engineer Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who solve real problems and meet real customer needs. We are seeking Data Engineers who are passionate about marrying data with emerging technologies. As a Capital One Lead Data Engineer, you’ll have the …",
+    salaryMin: 119348.05,
+    salaryMax: 119348.05,
+    rating: 5,
+  },
+  {
+    title: 'Manager, Software Engineering',
+    companyName: 'Capital One',
+    dateCreated: '2025-04-30T22:45:27Z',
+    location: 'New York City, New York, New York US',
+    redirectUrl:
+      'https://www.adzuna.com/land/ad/5171679414?se=PixmCoAr8BGHTW-b2K5VlA&utm_medium=api&utm_source=7d4f3da8&v=7F2A1A9F6C27BC295E6B33D624087FA5B28DF9C7',
+    jobDescription:
+      "Manager, Software Engineering Do you love building and pioneering in the technology space? Do you enjoy solving complex business problems in a fast-paced, collaborative, inclusive, and iterative delivery environment? At Capital One, you'll be part of a big group of makers, breakers, doers and disruptors, who love to solve real problems and meet real customer needs. We are seeking Back End Software Engineers who are passionate about marrying data with emerging technologies. As a Capital One Soft…",
+    salaryMin: 145766.88,
+    salaryMax: 145766.88,
+    rating: 4,
+  },
+];

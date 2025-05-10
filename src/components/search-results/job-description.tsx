@@ -61,7 +61,13 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
               </div>
 
               <div className="pt-4 space-y-1">
-                <p className="text-lg font-medium">Salary</p>
+                <div className="flex flex-row justify-between">
+                  <p className="text-lg font-medium">Salary</p>
+                  <span className="flex justify-end bg-purple-100 text-purple-800  font-semibold px-3 py-1 rounded-full">
+                    Diversity Score: {job.rating} / 5
+                  </span>
+                </div>
+
                 <p>
                   {job.salaryMin === job.salaryMax
                     ? `$${job.salaryMin.toLocaleString()}`
