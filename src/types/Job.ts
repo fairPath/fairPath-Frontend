@@ -7,6 +7,6 @@ export interface Job {
     jobDescription: string;
     salaryMin: number;
     salaryMax: number;
-    rating: number | null;
+    rating: number;
 
   }
