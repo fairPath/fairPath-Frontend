@@ -78,7 +78,7 @@ export function AutoComplete<T extends string>({
       e.preventDefault();
       if (searchValue.trim()) {
         router.push(
-          `dashboard/search-results?title=${encodeURIComponent(
+          `dashboard/search-results?titleOnly=${encodeURIComponent(
             searchValue.trim()
           )}`
         );

@@ -37,10 +37,8 @@ function Search() {
   );
 
   const handleButtonClick = () => {
-     router.push(`/dashboard/search-results?title=${searchValue}`);
-
+    router.push(`/dashboard/search-results?titleOnly=${searchValue}`);
   };
-
 
   return (
     <div className="flex flex-col justify-center w-full items-center min-h-160">
@@ -59,7 +57,14 @@ function Search() {
           items={filteredRoles}
         />
 
-        <Button variant='ghost'   className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus-visible:ring-0" disabled = {searchValue === ''} onClick={() => {handleButtonClick()}}>
+        <Button
+          variant="ghost"
+          className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus-visible:ring-0"
+          disabled={searchValue === ''}
+          onClick={() => {
+            handleButtonClick();
+          }}
+        >
           <div className="absolute right-3 top-1/3 -translate-y-1/2 h-7 w-4 text-muted-foreground ">
             <SearchIcon />
           </div>
