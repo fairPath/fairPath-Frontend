@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import JobTable from './job-table';
 import { Job } from '@/types/Job';
-import Loader from '../ui/loader';
+//import Loader from '../ui/loader';
 import axios from 'axios';
 
 const SearchContainer = () => {
@@ -111,7 +111,7 @@ const SearchContainer = () => {
     <>
       {loading && (
         <div className="flex items-center justify-center w-full h-full">
-          <Loader />
+          {/* <Loader /> */}
         </div>
       )}
       {!loading && error && <div>error loading jobs: {error}</div>}
