@@ -37,7 +37,7 @@ function Search() {
   );
 
   const handleButtonClick = () => {
-     router.push(`/dashboard/search-results?search=${searchValue}`);
+     router.push(`/dashboard/search-results?title=${searchValue}`);
 
   };
 

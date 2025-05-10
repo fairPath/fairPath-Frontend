@@ -1,4 +1,3 @@
-
 import { Command as CommandPrimitive } from 'cmdk';
 import { useMemo, useState } from 'react';
 import {
@@ -78,7 +77,11 @@ export function AutoComplete<T extends string>({
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (searchValue.trim()) {
-        router.push(`dashboard/search-results?search=${encodeURIComponent(searchValue.trim())}`);
+        router.push(
+          `dashboard/search-results?title=${encodeURIComponent(
+            searchValue.trim()
+          )}`
+        );
       }
     }
   };
