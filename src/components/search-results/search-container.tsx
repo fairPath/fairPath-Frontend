@@ -19,10 +19,10 @@ const SearchContainer = () => {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
   const [searchRole, setSearchRole] = useState<string>(
-    searchParams.get('title') || ''
+    searchParams.get('titleOnly') || ''
   );
   const [searchLocation, setSearchLocation] = useState<string>(
-    searchParams.get('location') || ''
+    searchParams.get('where') || ''
   );
   const [jobTypeFilter, setJobTypeFilter] = useState<string>(
     searchParams.get('jobType') || ''
@@ -39,8 +39,8 @@ const SearchContainer = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const title = searchParams.get('title');
-      const location = searchParams.get('location');
+      const title = searchParams.get('titleOnly');
+      const location = searchParams.get('where');
       const jobType = searchParams.get('jobType');
       const salary = searchParams.get('salary');
       const company = searchParams.get('company');
@@ -78,20 +78,48 @@ const SearchContainer = () => {
 
   const searchJobs = async () => {
     const params = new URLSearchParams();
-    if (searchRole) params.append('title', searchRole);
-    if (searchLocation) params.append('location', searchLocation);
-    if (jobTypeFilter) params.append('jobType', jobTypeFilter);
-    if (salaryFilter) params.append('salary', salaryFilter);
-    if (companyFilter) params.append('company', companyFilter);
-    if (diversityFilter) params.append('diversity', diversityFilter);
+    const backendRequestParams = new URLSearchParams();
+    if (searchRole){ 
+      params.append('titleOnly', searchRole);
+      backendRequestParams.append('titleOnly', searchRole);
+    }
+    if (searchLocation) {
+      params.append('where', searchLocation);
+      backendRequestParams.append('where', searchLocation);
+    }
+    if (jobTypeFilter) {
+      params.append('jobType', jobTypeFilter);
+      const jobTypeConversion: Record<string, string> = {'Full-Time':'fullTime', 'Part-Time':'partTime', 'Contract':'contract'}
+      backendRequestParams.append(jobTypeConversion[jobTypeFilter], '1');
+    }
+    if (salaryFilter) {
+      params.append('salary', salaryFilter);
+      const salaryMinConversion: Record<string, string>={'$40k+':'40000',
+          '$60k+':'60000',
+          '$80k+':'80000',
+          '$100k+':'100000',
+          '$120k+':'120000',
+          '$140k+':'140000',
+          '$160k+':'160000',
+          '$180k+':'180000'};
+      backendRequestParams.append('salaryMin', salaryMinConversion[salaryFilter]);
+    }
+    if (companyFilter) {
+      params.append('company', companyFilter);
+      backendRequestParams.append('company', companyFilter)
+    }
+    if (diversityFilter) {
+      params.append('diversity', diversityFilter);
+      backendRequestParams.append('rating', diversityFilter);
+    }
     const queryString = params.toString();
     const url = `/dashboard/search-results?${queryString}`;
     router.push(url);
-
+console.log(backendRequestParams.toString(),{salaryFilter});
     try {
       setLoading(true);
       await axios
-        .get<Job[]>(`http://localhost:8080/jobs?${queryString}`)
+        .get<Job[]>(`http://localhost:8080/jobs?${backendRequestParams}`)
         .then((res) => {
           setJobs(res.data);
         })
