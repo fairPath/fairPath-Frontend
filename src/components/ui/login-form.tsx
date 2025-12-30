@@ -74,7 +74,7 @@ export function LoginForm({ verified }: { verified?: string }) {
           <div className="flex items-center">
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <a
-              href="#" //need to build forgot password page
+              href="/forgot-password" //need to build forgot password page
               className="ml-auto text-sm underline-offset-4 hover:underline"
             >
               Forgot your password?
