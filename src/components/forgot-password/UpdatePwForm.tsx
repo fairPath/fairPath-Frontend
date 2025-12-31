@@ -19,31 +19,32 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
+export function UpdatePwForm({ token }: { token?: string }) {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await fetch('/api/auth/forgot-password', {
-      method: 'POST',
+    const response = await fetch('/api/auth/update-password', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ password, resetToken: token }),
     });
 
     if (response.ok) {
       router.push(`/login`);
-      toast.success('Password reset link sent to your email.');
+      toast.success('Password has been reset successfully.');
     } else {
-      console.error('Signup failed');
+      toast.error('Password Reset Failed');
+      console.error('Password reset failed');
     }
   };
 
   return (
-    <Card {...props}>
+    <Card>
       <CardHeader>
         <CardTitle className="text-center">Reset Password</CardTitle>
         <CardDescription className="text-center">
@@ -54,13 +55,13 @@ export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
         <form onSubmit={handleSubmit}>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="password">New Password</FieldLabel>
               <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                id="password"
+                type="password"
+                placeholder="New Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 required
               />
             </Field>

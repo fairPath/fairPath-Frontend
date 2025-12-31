@@ -10,14 +10,12 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
-
-export function LoginForm({ verified }: { verified?: string }) {
+export function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const didToast = useRef(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,16 +33,10 @@ export function LoginForm({ verified }: { verified?: string }) {
       router.push('/dashboard');
     } else {
       // Handle login error (e.g., show error message)
+      toast.error('Invalid email or password');
       console.error('Login failed');
     }
   };
-
-  useEffect(() => {
-    if (!verified || didToast.current) return;
-    didToast.current = true;
-    toast.success('Your account has been verified. Please log in.');
-    router.replace('/login');
-  }, [verified, router]);
 
   return (
     <form
