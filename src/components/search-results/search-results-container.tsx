@@ -60,7 +60,6 @@ const SearchResultsContainer = () => {
           .get<Job[]>(`http://localhost:8080/jobs?titleOnly=${title}`)
           .then((res) => {
             setJobs(res.data);
-            console.log('res', res.data);
           })
           .catch((err) => {
             console.error(err);
@@ -124,7 +123,6 @@ const SearchResultsContainer = () => {
     const queryString = params.toString();
     const url = `/dashboard/search-results?${queryString}`;
     router.push(url);
-    console.log(backendRequestParams.toString(), { salaryFilter });
     try {
       setLoading(true);
       await axios
