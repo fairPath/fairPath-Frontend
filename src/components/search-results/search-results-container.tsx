@@ -11,7 +11,7 @@ import { Job } from '@/types/Job';
 //import Loader from '../ui/loader';
 import axios from 'axios';
 
-const SearchContainer = () => {
+const SearchResultsContainer = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -56,11 +56,10 @@ const SearchContainer = () => {
       // Call API and return mock data
       try {
         setLoading(true);
-       await axios
+        await axios
           .get<Job[]>(`http://localhost:8080/jobs?titleOnly=${title}`)
           .then((res) => {
             setJobs(res.data);
-            console.log('res', res.data);
           })
           .catch((err) => {
             console.error(err);
@@ -79,7 +78,7 @@ const SearchContainer = () => {
   const searchJobs = async () => {
     const params = new URLSearchParams();
     const backendRequestParams = new URLSearchParams();
-    if (searchRole){ 
+    if (searchRole) {
       params.append('titleOnly', searchRole);
       backendRequestParams.append('titleOnly', searchRole);
     }
@@ -89,24 +88,33 @@ const SearchContainer = () => {
     }
     if (jobTypeFilter) {
       params.append('jobType', jobTypeFilter);
-      const jobTypeConversion: Record<string, string> = {'Full-Time':'fullTime', 'Part-Time':'partTime', 'Contract':'contract'}
+      const jobTypeConversion: Record<string, string> = {
+        'Full-Time': 'fullTime',
+        'Part-Time': 'partTime',
+        Contract: 'contract',
+      };
       backendRequestParams.append(jobTypeConversion[jobTypeFilter], '1');
     }
     if (salaryFilter) {
       params.append('salary', salaryFilter);
-      const salaryMinConversion: Record<string, string>={'$40k+':'40000',
-          '$60k+':'60000',
-          '$80k+':'80000',
-          '$100k+':'100000',
-          '$120k+':'120000',
-          '$140k+':'140000',
-          '$160k+':'160000',
-          '$180k+':'180000'};
-      backendRequestParams.append('salaryMin', salaryMinConversion[salaryFilter]);
+      const salaryMinConversion: Record<string, string> = {
+        '$40k+': '40000',
+        '$60k+': '60000',
+        '$80k+': '80000',
+        '$100k+': '100000',
+        '$120k+': '120000',
+        '$140k+': '140000',
+        '$160k+': '160000',
+        '$180k+': '180000',
+      };
+      backendRequestParams.append(
+        'salaryMin',
+        salaryMinConversion[salaryFilter]
+      );
     }
     if (companyFilter) {
       params.append('company', companyFilter);
-      backendRequestParams.append('company', companyFilter)
+      backendRequestParams.append('company', companyFilter);
     }
     if (diversityFilter) {
       params.append('diversity', diversityFilter);
@@ -115,7 +123,6 @@ const SearchContainer = () => {
     const queryString = params.toString();
     const url = `/dashboard/search-results?${queryString}`;
     router.push(url);
-console.log(backendRequestParams.toString(),{salaryFilter});
     try {
       setLoading(true);
       await axios
@@ -217,4 +224,4 @@ console.log(backendRequestParams.toString(),{salaryFilter});
   );
 };
 
-export default SearchContainer;
+export default SearchResultsContainer;

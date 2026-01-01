@@ -20,7 +20,7 @@ export default function HeroSection() {
               text="FairPath helps you find jobs with companies that value diversity and equality."
             />
           </div>
-          <Link href="/dashboard">
+          <Link href="/login">
             <Button
               className="text-base px-6 py-3 hover:bg-purple-700"
             >
