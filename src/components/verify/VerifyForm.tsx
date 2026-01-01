@@ -44,8 +44,10 @@ const VerifyForm = ({ email }: { email: string }) => {
     });
 
     if (response.ok) {
-      router.push('/login?verified=true');
+      toast.success('User Verified Successfully');
+      router.push('/login');
     } else {
+      toast.error('User Verification Error');
       console.error('Signup failed');
     }
   };
