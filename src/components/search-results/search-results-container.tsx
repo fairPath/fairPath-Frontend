@@ -13,6 +13,7 @@ import axios from 'axios';
 
 const SearchResultsContainer = () => {
   const searchParams = useSearchParams();
+  const sp = searchParams.toString();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +58,11 @@ const SearchResultsContainer = () => {
       try {
         setLoading(true);
         await axios
-          .get<Job[]>(`http://localhost:8080/jobs?titleOnly=${title}`)
+          .get<Job[]>(`/api/jobs`, {
+            params: {
+              titleOnly: title,
+            },
+          })
           .then((res) => {
             setJobs(res.data);
           })
@@ -73,7 +78,7 @@ const SearchResultsContainer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [sp]);
 
   const searchJobs = async () => {
     const params = new URLSearchParams();
@@ -120,13 +125,15 @@ const SearchResultsContainer = () => {
       params.append('diversity', diversityFilter);
       backendRequestParams.append('rating', diversityFilter);
     }
-    const queryString = params.toString();
-    const url = `/dashboard/search-results?${queryString}`;
-    router.push(url);
+    // const queryString = params.toString();
+    // const url = `/dashboard/search-results?${queryString}`;
+    // router.push(url);
     try {
       setLoading(true);
       await axios
-        .get<Job[]>(`http://localhost:8080/jobs?${backendRequestParams}`)
+        .get<Job[]>(`/api/jobs`, {
+          params: backendRequestParams,
+        })
         .then((res) => {
           setJobs(res.data);
         })
@@ -145,9 +152,7 @@ const SearchResultsContainer = () => {
   return (
     <>
       {loading && (
-        <div className="flex items-center justify-center w-full h-full">
-          {/* <Loader /> */}
-        </div>
+        <div className="flex items-center justify-center w-full h-full"></div>
       )}
       {!loading && error && <div>error loading jobs: {error}</div>}
       {!loading && !error && jobs.length === 0 && (

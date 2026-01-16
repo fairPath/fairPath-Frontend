@@ -7,7 +7,7 @@ import { AutoComplete } from '../ui/autocomplete';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 
-function Search() {
+function DashboardSearch() {
   const [searchValue, setSearchValue] = useState<string>('');
   const [selectedValue, setSelectedValue] = useState<string>('');
   const router = useRouter();
@@ -74,4 +74,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default DashboardSearch;

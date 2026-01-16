@@ -1,10 +1,10 @@
 'use client';
-import Search from '../../components/dashboard/Search';
+import DashboardSearch from '../../components/dashboard/DashboardSearch';
 
 export default function DashboardPage() {
   return (
     <div>
-      <Search></Search>
+      <DashboardSearch></DashboardSearch>
     </div>
   );
 }

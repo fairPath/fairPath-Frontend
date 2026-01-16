@@ -9,39 +9,21 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { toast } from 'sonner';
+import { login } from '@/app/(auth)/login/actions';
+import { useRouter } from 'next/navigation';
 export function LoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (response.ok) {
-      // Login successful, redirect to dashboard
-      router.push('/dashboard');
-    } else {
-      // Handle login error (e.g., show error message)
-      toast.error('Invalid email or password');
-      console.error('Login failed');
-    }
-  };
-
   return (
     <form
-      onSubmit={(e) => {
-        handleSubmit(e);
+      action={async (formData: FormData) => {
+        const result = await login(formData);
+        if (!result.ok) {
+          toast.error('invalid email or password');
+        } else {
+          toast.success('Logged in successfully');
+          router.push('/dashboard');
+        }
       }}
       className={cn('flex flex-col gap-6')}
     >
@@ -57,8 +39,8 @@ export function LoginForm() {
           <Input
             id="email"
             type="email"
+            name="email"
             placeholder="m@example.com"
-            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </Field>
@@ -72,12 +54,7 @@ export function LoginForm() {
               Forgot your password?
             </a>
           </div>
-          <Input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <Input id="password" type="password" name="password" required />
         </Field>
         <Field>
           <Button type="submit">Login</Button>
@@ -96,7 +73,6 @@ export function LoginForm() {
           <FieldDescription className="text-center">
             Don&apos;t have an account?{' '}
             <a href="/signup" className="underline underline-offset-4">
-              {/* need registration page */}
               Sign up
             </a>
           </FieldDescription>

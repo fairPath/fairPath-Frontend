@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,29 +17,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { sendPasswordReset } from '@/app/(auth)/forgot-password/actions';
 
 export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const response = await fetch('/api/auth/forgot-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (response.ok) {
-      router.push(`/login`);
-      toast.success('Password reset link sent to your email.');
-    } else {
-      console.error('Signup failed');
-    }
-  };
 
   return (
     <Card {...props}>
@@ -51,16 +31,25 @@ export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit}>
+        <form
+          action={async (formData: FormData) => {
+            const result = await sendPasswordReset(formData);
+            if (!result.ok) {
+              toast.error('Failed to send password reset email');
+            } else {
+              toast.success('Password reset link sent to your email.');
+              router.push('/login');
+            }
+          }}
+        >
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
                 id="email"
                 type="email"
+                name="email"
                 placeholder="m@example.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
                 required
               />
             </Field>
