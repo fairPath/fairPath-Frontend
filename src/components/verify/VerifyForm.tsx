@@ -12,6 +12,7 @@ import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../ui/input-otp';
 import { Button } from '../ui/button';
 import { toast } from 'sonner';
+import { verify } from '@/app/(auth)/verify/actions';
 
 const callResendAPI = async (email: string) => {
   const response = await fetch('/api/auth/resend-verification', {
@@ -30,27 +31,8 @@ const callResendAPI = async (email: string) => {
 };
 const VerifyForm = ({ email }: { email: string }) => {
   const router = useRouter();
+  const verifyWithEmail = verify.bind(null, email);
   const [code, setCode] = useState('');
-
-  const handleVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
-    //call verification api here
-    const response = await fetch('/api/auth/verify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ verificationCode: code, email }),
-    });
-
-    if (response.ok) {
-      toast.success('User Verified Successfully');
-      router.push('/login');
-    } else {
-      toast.error('User Verification Error');
-      console.error('Signup failed');
-    }
-  };
 
   return (
     <Card className="w-lg">
@@ -62,7 +44,19 @@ const VerifyForm = ({ email }: { email: string }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleVerify}>
+        <form
+          action={async (FormData) => {
+            const result = await verifyWithEmail(FormData);
+
+            if (!result.ok) {
+              toast.error(result.error || 'verification failed');
+              return;
+            }
+
+            toast.success('User verified successfully');
+            router.push('/login');
+          }}
+        >
           <FieldGroup>
             <Field>
               <FieldLabel className="justify-center" htmlFor="otp">
@@ -71,6 +65,7 @@ const VerifyForm = ({ email }: { email: string }) => {
               <InputOTP
                 value={code}
                 onChange={(value) => setCode(value)}
+                name="code"
                 maxLength={6}
                 id="otp"
                 required

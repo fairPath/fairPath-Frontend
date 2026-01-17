@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,31 +17,10 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { updatePassword } from '@/app/(auth)/update-password/actions';
 
 export function UpdatePwForm({ token }: { token?: string }) {
   const router = useRouter();
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const response = await fetch('/api/auth/update-password', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ password, resetToken: token }),
-    });
-
-    if (response.ok) {
-      router.push(`/login`);
-      toast.success('Password has been reset successfully.');
-    } else {
-      toast.error('Password Reset Failed');
-      console.error('Password reset failed');
-    }
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -52,16 +30,25 @@ export function UpdatePwForm({ token }: { token?: string }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit}>
+        <form
+          action={async (FormData: FormData) => {
+            const result = await updatePassword(FormData, token);
+            if (!result.ok) {
+              toast.error('Password Reset Failed');
+            } else {
+              toast.success('Password has been reset successfully.');
+              router.push('/login');
+            }
+          }}
+        >
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="password">New Password</FieldLabel>
               <Input
                 id="password"
                 type="password"
+                name="password"
                 placeholder="New Password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
                 required
               />
             </Field>
