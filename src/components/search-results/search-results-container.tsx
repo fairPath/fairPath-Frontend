@@ -10,6 +10,7 @@ import JobTable from './job-table';
 import { Job } from '@/types/Job';
 //import Loader from '../ui/loader';
 import axios from 'axios';
+import { useLoading } from './../shared/LoadingContext';
 
 const SearchResultsContainer = () => {
   const searchParams = useSearchParams();
@@ -37,6 +38,7 @@ const SearchResultsContainer = () => {
   const [diversityFilter, setDiversityFilter] = useState<string>(
     searchParams.get('diversity') || ''
   );
+  const { startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +58,7 @@ const SearchResultsContainer = () => {
 
       // Call API and return mock data
       try {
+        startLoading();
         setLoading(true);
         await axios
           .get<Job[]>(`/api/jobs`, {
@@ -70,8 +73,10 @@ const SearchResultsContainer = () => {
             console.error(err);
           });
 
+        stopLoading();
         setLoading(false);
       } catch (error) {
+        stopLoading();
         setLoading(false);
         setError(`An error occurred while fetching jobs ${error}`);
       }
@@ -129,6 +134,7 @@ const SearchResultsContainer = () => {
     // const url = `/dashboard/search-results?${queryString}`;
     // router.push(url);
     try {
+      startLoading();
       setLoading(true);
       await axios
         .get<Job[]>(`/api/jobs`, {
@@ -143,10 +149,14 @@ const SearchResultsContainer = () => {
       router.push(
         `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}&diversity=${diversityFilter}`
       );
+      stopLoading();
       setLoading(false);
     } catch (error) {
+      stopLoading();
       setLoading(false);
       setError(`An error occurred while fetching jobs ${error}`);
+    } finally{
+      stopLoading();
     }
   };
   return (
