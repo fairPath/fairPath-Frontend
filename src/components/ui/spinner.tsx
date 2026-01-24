@@ -1,27 +1,3 @@
-// // components/GlobalSpinner.tsx
-// 'use client';
-
-// import { useLoading } from './../shared/LoadingContext';
-// // Assuming you have installed Radix Themes for easy styling
-// // npm install @radix-ui/themes
-// import { Spinner } from '@radix-ui/themes'; 
-
-// const GlobalSpinner = () => {
-//   const { isProgressLoading } = useLoading();
-
-//   if (!isProgressLoading) return null;
-
-//   console.log('spinner');
-//   return (
-//     <div className="fixed inset-0 bg-red bg-opacity-50 flex items-center justify-center z-50">
-//       <Spinner size="3" />
-//       Loading
-//     </div>
-//   );
-// };
-
-//export default GlobalSpinner;
-
 'use client';
 
 import { useLoading } from '@/components/shared/LoadingContext';

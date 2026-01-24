@@ -3,9 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import '../app/globals.css';
 import { Toaster } from 'sonner';
 import Providers from './providers';
-
-//import '@radix-ui/themes/styles.css'; // Don't forget to import Radix Themes CSS
-import '@radix-ui/themes/styles.css';
 import './globals.css';
 
 
