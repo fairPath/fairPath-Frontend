@@ -33,7 +33,7 @@ function DashboardSearch() {
   ];
 
   const filteredRoles = items.filter((role) =>
-    role.label.toLowerCase().includes(searchValue.toLowerCase())
+    role.label.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
   const handleButtonClick = () => {
@@ -43,7 +43,7 @@ function DashboardSearch() {
   return (
     <div className="flex flex-col justify-center w-full items-center min-h-160">
       <h1 className="text-3xl font-bold mb-4 tracking-wide">
-        <SplitText text="Find your Dream Job"></SplitText>
+        <SplitText text="Find Your Dream Job"></SplitText>
       </h1>
       <div className="relative w-full max-w-2xl">
         <AutoComplete

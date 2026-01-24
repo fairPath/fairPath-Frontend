@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     if (!authToken) {
       return NextResponse.json(
         { message: 'Authentication token missing' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
   } catch (error: any) {
     return NextResponse.json(
       { message: 'Login failed', error: error.message },
-      { status: error.response?.status || 500 }
+      { status: error.response?.status || 500 },
     );
   }
 }
