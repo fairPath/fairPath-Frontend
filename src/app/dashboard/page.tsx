@@ -1,4 +1,3 @@
-'use client';
 import DashboardSearch from '../../components/dashboard/DashboardSearch';
 
 export default function DashboardPage() {

@@ -10,7 +10,6 @@ export async function updatePassword(
 ): Promise<UpdateResult> {
   const password = formData.get('password');
 
-  console.log(`body {${password}, resetToken${token}}`);
 
   try {
     const response = await axios.put(

@@ -1,4 +1,3 @@
-'use client';
 import SearchResultsContainer from '@/components/search-results/search-results-container';
 import { Suspense } from 'react';
 
