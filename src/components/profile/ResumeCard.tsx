@@ -1,7 +1,5 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { File } from 'lucide-react';
-import { Button } from '../ui/button';
 import { ResumeDropdown } from './ResumeDropdown';
 
 const ResumeCard = () => {

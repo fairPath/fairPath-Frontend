@@ -7,7 +7,6 @@ type ProfileProps = {
   user: User;
 };
 const Profile = ({ user }: ProfileProps) => {
-  console.log(`user ${JSON.stringify(user)}`);
   return (
     <div className="mx-auto w-full max-w-2xl px-6 py-10 ">
       <div className="space-y-6">
