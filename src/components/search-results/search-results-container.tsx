@@ -9,15 +9,16 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import JobTable from './job-table';
 import { Job } from '@/types/Job';
 import axios from 'axios';
+import Loading from '../ui/loading';
 
 interface SearchResultsContainerProps {
   token: string;
 }
 const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const searchParams = useSearchParams();
-  const sp = searchParams.toString();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [jobLoading, setJobLoading] = useState(false);
+  const [jobSearchLoading, setJobSearchLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
@@ -57,7 +58,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
 
       // Call API and return mock data
       try {
-        setLoading(true);
+        setJobLoading(true);
         await axios
           .get<Job[]>(`/api/jobs`, {
             params: {
@@ -71,15 +72,15 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
             console.error(err);
           });
 
-        setLoading(false);
+        setJobLoading(false);
       } catch (error) {
-        setLoading(false);
+        setJobLoading(false);
         setError(`An error occurred while fetching jobs ${error}`);
       }
     };
 
     fetchData();
-  }, [sp]);
+  }, []);
 
   const searchJobs = async () => {
     const params = new URLSearchParams();
@@ -124,7 +125,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
       backendRequestParams.append('rating', diversityFilter);
     }
     try {
-      setLoading(true);
+      setJobLoading(true);
       await axios
         .get<Job[]>(`/api/jobs`, {
           params: backendRequestParams,
@@ -138,17 +139,17 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
       router.push(
         `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}&diversity=${diversityFilter}`
       );
-      setLoading(false);
+      setJobLoading(false);
     } catch (error) {
-      setLoading(false);
+      setJobLoading(false);
       setError(`An error occurred while fetching jobs ${error}`);
     }
   };
   return (
     <>
-      {loading && <div className="flex items-center justify-center w-full h-full"></div>}
-      {!loading && error && <div>error loading jobs: {error}</div>}
-      {!loading && !error && jobs.length === 0 && (
+      {jobLoading && <Loading />}
+      {!jobLoading && error && <div>error loading jobs: {error}</div>}
+      {!jobLoading && !error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
           <h2 className="text-2xl font-bold">No jobs found</h2>
           <p className="text-gray-500">Try a different search.</p>
@@ -160,7 +161,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
           </Button>
         </div>
       )}
-      {!loading && !error && jobs.length > 0 && (
+      {!jobLoading && !error && jobs.length > 0 && (
         <div className="h-screen flex flex-col px-4">
           {/* Search Inputs */}
           <div className="flex items-center justify-center gap-x-2 mb-6">
