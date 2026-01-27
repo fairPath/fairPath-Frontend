@@ -26,7 +26,7 @@ const items = [
   },
   {
     title: 'Saved Jobs',
-    url: '/saved-jobs',
+    url: '/dashboard/saved-jobs',
     icon: Bookmark,
   },
   {
