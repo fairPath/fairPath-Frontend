@@ -40,7 +40,7 @@ const Profile = ({ user }: ProfileProps) => {
           </CardContent>
         </Card>
 
-        <ResumeCard />
+        <ResumeCard user={user} />
       </div>
     </div>
   );

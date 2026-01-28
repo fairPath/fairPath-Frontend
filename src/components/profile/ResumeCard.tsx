@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { File } from 'lucide-react';
 import { ResumeDropdown } from './ResumeDropdown';
+import { User } from '@/types/User';
 
-const ResumeCard = () => {
+const ResumeCard = (user: User) => {
   return (
     <div>
       {' '}
@@ -21,7 +22,11 @@ const ResumeCard = () => {
             <div className="ml-4">
               <h3 className="text-sm font-medium text-foreground">Resume 1</h3>
               <p className="text-xs text-muted-foreground">
-                Last updated: Today
+                {user.resumeUpdatedAt
+                  ? `Updated at: ${new Date(
+                      user.resumeUpdatedAt,
+                    ).toLocaleDateString()}`
+                  : 'No resume uploaded'}
               </p>
             </div>
             <div className="ml-auto">

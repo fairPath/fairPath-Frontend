@@ -14,7 +14,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -30,9 +29,40 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { requestPresignUrl } from '@/app/dashboard/profile/action';
+import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
+import { refresh } from 'next/cache';
 
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
+
+  async function uploadResume(
+    formData: FormData,
+    data: ResumePresignUrlResponse,
+  ) {
+    console.log('Uploading resume with ID:', data.resumeId);
+    console.log('Upload URL:', data.presignedUrl);
+    console.log('Uploading resume with data:', data);
+
+    try {
+      const response = await fetch(data.presignedUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/pdf',
+        },
+        body: formData.get('file') as File, // Ensure the body contains the file content
+      });
+
+      if (response.ok) {
+        console.log('Resume uploaded successfully');
+        //after updating refresh page and also send confirm backend request to update table
+      } else {
+        console.error('Failed to upload resume');
+      }
+    } catch (error) {
+      console.error('Error during resume upload:', error);
+    }
+  }
 
   return (
     <>
@@ -75,24 +105,37 @@ export function ResumeDropdown() {
       <Dialog open={showNewDialog} onOpenChange={setShowNewDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Create New File</DialogTitle>
-            <DialogDescription>
-              Provide a name for your new file. Click create when you&apos;re
-              done.
-            </DialogDescription>
+            <DialogTitle>Upload File</DialogTitle>
           </DialogHeader>
-          <FieldGroup className="pb-3">
-            <Field>
-              <FieldLabel htmlFor="filename">File Name</FieldLabel>
-              <Input id="filename" name="filename" placeholder="document.txt" />
-            </Field>
-          </FieldGroup>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Create</Button>
-          </DialogFooter>
+          <form
+            action={async (formData) => {
+              const res = await requestPresignUrl(formData);
+              if (res?.ok) {
+                uploadResume(formData, res.data);
+                setShowNewDialog(false);
+                refresh();
+              }
+            }}
+          >
+            <FieldGroup className="pb-3">
+              <Field>
+                <FieldLabel htmlFor="file">File</FieldLabel>
+                <Input
+                  name="file"
+                  id="file"
+                  type="file"
+                  accept=".pdf,application/pdf"
+                  required
+                />
+              </Field>
+            </FieldGroup>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button type="submit">Upload</Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </>
