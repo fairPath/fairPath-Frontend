@@ -18,7 +18,6 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [jobLoading, setJobLoading] = useState(false);
-  const [jobSearchLoading, setJobSearchLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
@@ -149,7 +148,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
     <>
       {jobLoading && <Loading />}
       {!jobLoading && error && <div>error loading jobs: {error}</div>}
-      {!jobLoading && !error && jobs.length === 0 && (
+      {!jobLoading && !error && (jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
           <h2 className="text-2xl font-bold">No jobs found</h2>
           <p className="text-gray-500">Try a different search.</p>
