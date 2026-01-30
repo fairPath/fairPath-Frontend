@@ -1,4 +1,4 @@
-'use server'
+'use server';
 import SavedJobs from '@/components/saved-jobs/saved-jobs';
 import { Suspense } from 'react';
 import { Job } from '@/types/Job';
@@ -19,8 +19,7 @@ const getSavedJobs = async (token: string): Promise<Job[] | undefined> => {
         },
       }
     );
-    if (response.data)
-      return response.data;
+    if (response.data) return response.data;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'delete user failed';
     console.error(message);

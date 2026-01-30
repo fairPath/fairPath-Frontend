@@ -3,7 +3,6 @@
 import { Job } from '@/types/Job';
 import { Building2 } from 'lucide-react';
 
-
 interface JobCardProps {
   job: Job;
 }

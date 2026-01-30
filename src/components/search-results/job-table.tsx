@@ -34,7 +34,7 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         );
         if (response.data === 'success') {
           updateSavedJob(updatedJob);
@@ -47,12 +47,14 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
     const deleteJob = async () => {
       try {
         const response = await axios.delete(
-          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/delete`, {
-          params: { jobId: job.jobId },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/delete`,
+          {
+            params: { jobId: job.jobId },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (response.data === 'successully deleted') {
           updateSavedJob(updatedJob);
         }
@@ -82,7 +84,11 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
           >
             <JobCard job={job} />
             <div className=" flex fill-purple-600">
-              <Star fill={job.saved ? 'purple' : 'none'} onClick={() => handleClick(job, index)} style={{ cursor: 'pointer' }} />
+              <Star
+                fill={job.saved ? 'purple' : 'none'}
+                onClick={() => handleClick(job, index)}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
           </motion.div>
         ))}

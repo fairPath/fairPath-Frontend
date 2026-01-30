@@ -8,10 +8,9 @@ const getToken = async () => {
 };
 
 export default async function SearchResultsPage() {
-
   const token = await getToken();
   if (!token) {
-    redirect("/login"); // ✅ server redirect
+    redirect('/login'); // ✅ server redirect
   }
   return (
     <Suspense>
