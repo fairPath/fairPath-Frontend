@@ -13,7 +13,7 @@ import axios from 'axios';
 interface SearchResultsContainerProps {
   token: string;
 }
-const SearchResultsContainer = ({token}: SearchResultsContainerProps) => {
+const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const searchParams = useSearchParams();
   const sp = searchParams.toString();
   const router = useRouter();
@@ -40,14 +40,13 @@ const SearchResultsContainer = ({token}: SearchResultsContainerProps) => {
     searchParams.get('diversity') || ''
   );
 
-  const updateSavedJob = (job:Job)=>{
-    const updatedJobs = jobs.map((j)=>{
-      if(j.jobId === job.jobId){
+  const updateSavedJob = (job: Job) => {
+    const updatedJobs = jobs.map((j) => {
+      if (j.jobId === job.jobId) {
         return job;
-      }else return j;
+      } else return j;
     });
     setJobs(updatedJobs);
-
   }
 
   useEffect(() => {

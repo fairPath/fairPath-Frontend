@@ -22,7 +22,7 @@ const JobCard = ({ job }: JobCardProps) => {
       <div className="text-gray-500 mt-1">{job.location}</div>
       <div className="flex flex-row gap-2 mt-2 justify-between">
         <div className="pt-1">{`$${job.salaryMin} - $${job.salaryMax}`}</div>
-        </div>
+      </div>
     </>
   );
 };

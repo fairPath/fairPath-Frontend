@@ -17,54 +17,54 @@ interface JobTableProps {
   jobs: Job[]; // Replace 'any' with the actual type of your jobs array
   selectedJob: Job | null;
   setSelectedJob: (job: Job | null) => void;
-  updateSavedJob:(jobs:Job) => void;
+  updateSavedJob: (jobs: Job) => void;
   token: string;
 }
 
 const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: JobTableProps) => {
-   const handleClick = (job:Job) => {
+  const handleClick = (job: Job, index: number) => {
     const saved = !job.saved;
-    const updatedJob = {...job, saved};
-      const saveJob = async () => {  
-          try {
-            const response = await axios.post(
-              `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/savedJobs/save`,
-              updatedJob,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              },
-            );
-            if (response.data === 'success') {
-              updateSavedJob(updatedJob);
-            }
-          } catch (error: unknown) {
-            const message = error instanceof Error ? error.message : 'Get user failed';
-            console.error(message);
-          }
-      };
-      const deleteJob = async () => {  
-          try {
-            const response = await axios.get(
-              `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/savedJobs/delete`,{
-              params: {jobId:job.jobId},
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            if (response.data === 'successully deleted') {
-              updateSavedJob(updatedJob);
-            }
-          } catch (error: unknown) {
-            const message = error instanceof Error ? error.message : 'delete user failed';
-            console.error(message);
-          }
-      };
-  
-      if(saved) saveJob();
-      else deleteJob();
+    const updatedJob = { ...job, saved };
+    const saveJob = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/save`,
+          updatedJob,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        if (response.data === 'success') {
+          updateSavedJob(updatedJob);
+        }
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Get user failed';
+        console.error(message);
+      }
     };
+    const deleteJob = async () => {
+      try {
+        const response = await axios.delete(
+          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/delete`, {
+          params: { jobId: job.jobId },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.data === 'successully deleted') {
+          updateSavedJob(updatedJob);
+        }
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'delete user failed';
+        console.error(message);
+      }
+    };
+
+    if (saved) saveJob();
+    else deleteJob();
+  };
 
   return (
     <>
@@ -81,9 +81,9 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
             className="bg-white w-lg shadow-md rounded-lg p-4 hover:shadow-lg hover:bg-purple-100  transition-shadow duration-200 cursor-pointer"
           >
             <JobCard job={job} />
-          <div className=" flex fill-purple-600">
-            <Star fill={job.saved ? 'purple' : 'none'} onClick={()=>handleClick(job)} style={{ cursor: 'pointer' }}/>
-          </div>
+            <div className=" flex fill-purple-600">
+              <Star fill={job.saved ? 'purple' : 'none'} onClick={() => handleClick(job, index)} style={{ cursor: 'pointer' }} />
+            </div>
           </motion.div>
         ))}
       </div>
