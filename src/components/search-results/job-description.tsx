@@ -12,7 +12,7 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
   return (
     <>
       {!job && (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex justify-center items-center">
           <p className="text-lg font-semibold">no job to display...</p>
         </div>
       )}
@@ -52,9 +52,6 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
               <div className="pt-4 space-y-1">
                 <div className="flex flex-row justify-between">
                   <p className="text-lg font-medium">Salary</p>
-                  <span className="flex justify-end bg-purple-100 text-purple-800  font-semibold px-3 py-1 rounded-full">
-                    Diversity Score: {job.rating} / 5
-                  </span>
                 </div>
 
                 <p>

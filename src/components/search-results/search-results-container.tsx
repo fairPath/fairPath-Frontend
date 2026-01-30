@@ -8,10 +8,12 @@ import { Button } from '../ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import JobTable from './job-table';
 import { Job } from '@/types/Job';
-//import Loader from '../ui/loader';
 import axios from 'axios';
 
-const SearchResultsContainer = () => {
+interface SearchResultsContainerProps {
+  token: string;
+}
+const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const searchParams = useSearchParams();
   const sp = searchParams.toString();
   const router = useRouter();
@@ -27,6 +29,15 @@ const SearchResultsContainer = () => {
   const [diversityFilter, setDiversityFilter] = useState<string>(
     searchParams.get('diversity') || ''
   );
+
+  const updateSavedJob = (job: Job) => {
+    const updatedJobs = jobs.map((j) => {
+      if (j.jobId === job.jobId) {
+        return job;
+      } else return j;
+    });
+    setJobs(updatedJobs);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -112,9 +123,6 @@ const SearchResultsContainer = () => {
       params.append('diversity', diversityFilter);
       backendRequestParams.append('rating', diversityFilter);
     }
-    // const queryString = params.toString();
-    // const url = `/dashboard/search-results?${queryString}`;
-    // router.push(url);
     try {
       setLoading(true);
       await axios
@@ -202,7 +210,13 @@ const SearchResultsContainer = () => {
 
           {/* Job Card Table */}
           <div className=" flex flex-grow justify-center overflow-y-auto items-center ">
-            <JobTable jobs={jobs} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+            <JobTable
+              jobs={jobs}
+              selectedJob={selectedJob}
+              setSelectedJob={setSelectedJob}
+              updateSavedJob={updateSavedJob}
+              token={token}
+            />
           </div>
         </div>
       )}

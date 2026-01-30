@@ -1,4 +1,5 @@
 export interface Job {
+  jobId: string;
   title: string;
   companyName: string;
   dateCreated: string;
@@ -7,5 +8,5 @@ export interface Job {
   jobDescription: string;
   salaryMin: number;
   salaryMax: number;
-  rating: number;
+  saved: boolean;
 }
