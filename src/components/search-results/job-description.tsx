@@ -32,21 +32,12 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
                         dateStyle: 'full',
                       }).format(new Date(job.dateCreated))}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      {job.location}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{job.location}</p>
                   </div>
 
                   <div className="flex justify-end flex-grow">
-                    <Button
-                      className=" bg-purple-600 hover:bg-blue-600"
-                      asChild
-                    >
-                      <a
-                        href={job.redirectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                    <Button className=" bg-purple-600 hover:bg-blue-600" asChild>
+                      <a href={job.redirectUrl} target="_blank" rel="noopener noreferrer">
                         Apply on Adzuna
                       </a>
                     </Button>
@@ -55,9 +46,7 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
               </div>
 
               <div className="pt-4">
-                <p className="text-base whitespace-pre-line">
-                  {job.jobDescription}
-                </p>
+                <p className="text-base whitespace-pre-line">{job.jobDescription}</p>
               </div>
 
               <div className="pt-4 space-y-1">

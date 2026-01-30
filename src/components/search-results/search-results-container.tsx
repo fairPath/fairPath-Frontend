@@ -21,21 +21,11 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const [error, setError] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
-  const [searchRole, setSearchRole] = useState<string>(
-    searchParams.get('titleOnly') || ''
-  );
-  const [searchLocation, setSearchLocation] = useState<string>(
-    searchParams.get('where') || ''
-  );
-  const [jobTypeFilter, setJobTypeFilter] = useState<string>(
-    searchParams.get('jobType') || ''
-  );
-  const [salaryFilter, setSalaryFilter] = useState<string>(
-    searchParams.get('salary') || ''
-  );
-  const [companyFilter, setCompanyFilter] = useState<string>(
-    searchParams.get('company') || ''
-  );
+  const [searchRole, setSearchRole] = useState<string>(searchParams.get('titleOnly') || '');
+  const [searchLocation, setSearchLocation] = useState<string>(searchParams.get('where') || '');
+  const [jobTypeFilter, setJobTypeFilter] = useState<string>(searchParams.get('jobType') || '');
+  const [salaryFilter, setSalaryFilter] = useState<string>(searchParams.get('salary') || '');
+  const [companyFilter, setCompanyFilter] = useState<string>(searchParams.get('company') || '');
   const [diversityFilter, setDiversityFilter] = useState<string>(
     searchParams.get('diversity') || ''
   );
@@ -123,10 +113,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
         '$160k+': '160000',
         '$180k+': '180000',
       };
-      backendRequestParams.append(
-        'salaryMin',
-        salaryMinConversion[salaryFilter]
-      );
+      backendRequestParams.append('salaryMin', salaryMinConversion[salaryFilter]);
     }
     if (companyFilter) {
       params.append('company', companyFilter);
@@ -159,9 +146,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   };
   return (
     <>
-      {loading && (
-        <div className="flex items-center justify-center w-full h-full"></div>
-      )}
+      {loading && <div className="flex items-center justify-center w-full h-full"></div>}
       {!loading && error && <div>error loading jobs: {error}</div>}
       {!loading && !error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
