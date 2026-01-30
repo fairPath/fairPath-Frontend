@@ -2,8 +2,20 @@
 
 import { useActionState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { signup } from '@/app/(auth)/signup/actions';
 import { toast } from 'sonner';
@@ -14,8 +26,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     fieldErrors: {},
   });
 
-  const fieldErrors = state.ok ? {} : (state.fieldErrors ?? {});
-  const values = state.ok ? {} : (state.values ?? {});
+  const fieldErrors = state.ok ? {} : state.fieldErrors ?? {};
+  const values = state.ok ? {} : state.values ?? {};
 
   useEffect(() => {
     if (!state.ok && state.error) {
@@ -26,7 +38,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     <Card {...props}>
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
-        <CardDescription>Enter your information below to create your account</CardDescription>
+        <CardDescription>
+          Enter your information below to create your account
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form action={formAction}>
@@ -42,7 +56,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 required
               />
               {fieldErrors.firstName && (
-                <FieldError className="mt-1">{fieldErrors.firstName}</FieldError>
+                <FieldError className="mt-1">
+                  {fieldErrors.firstName}
+                </FieldError>
               )}
             </Field>
             <Field>
@@ -84,9 +100,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 required
               />
               <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email with anyone else.
+                We&apos;ll use this to contact you. We will not share your email
+                with anyone else.
               </FieldDescription>
-              {fieldErrors.email && <FieldError className="mt-1">{fieldErrors.email}</FieldError>}
+              {fieldErrors.email && (
+                <FieldError className="mt-1">{fieldErrors.email}</FieldError>
+              )}
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -97,13 +116,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 type="password"
                 required
               />
-              <FieldDescription>Must be at least 8 characters long.</FieldDescription>
+              <FieldDescription>
+                Must be at least 8 characters long.
+              </FieldDescription>
               {fieldErrors.password && (
                 <FieldError className="mt-1">{fieldErrors.password}</FieldError>
               )}
             </Field>
             <Field>
-              <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
+              <FieldLabel htmlFor="confirm-password">
+                Confirm Password
+              </FieldLabel>
               <Input
                 id="confirm-password"
                 name="confirmPassword"
@@ -113,7 +136,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               />
               <FieldDescription>Please confirm your password.</FieldDescription>
               {fieldErrors.confirmPassword && (
-                <FieldError className="mt-1">{fieldErrors.confirmPassword}</FieldError>
+                <FieldError className="mt-1">
+                  {fieldErrors.confirmPassword}
+                </FieldError>
               )}
             </Field>
             <FieldGroup>

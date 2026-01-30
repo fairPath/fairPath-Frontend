@@ -10,13 +10,20 @@ export default function HeroSection() {
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-white">
         <div>
           <h1 className="text-4xl sm:text-5xl font-bold mb-4 drop-shadow-md">
-            <SplitText text="Discover Inclusive Job Opportunities" />
+          <SplitText
+              text="Discover Inclusive Job Opportunities"
+            />
+         
           </h1>
           <div className="text-lg mb-6 drop-shadow-sm">
-            <SplitText text="FairPath helps you find jobs with companies that value diversity and equality." />
+            <SplitText
+              text="FairPath helps you find jobs with companies that value diversity and equality."
+            />
           </div>
           <Link href="/login">
-            <Button className="text-base px-6 py-3 hover:bg-purple-700">
+            <Button
+              className="text-base px-6 py-3 hover:bg-purple-700"
+            >
               Search Jobs
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -14,7 +14,13 @@ interface FilterButtonProps {
   onValueChange?: (value: string) => void;
 }
 
-const FilterButton = ({ title, options, onSelect, placeholder, value }: FilterButtonProps) => {
+const FilterButton = ({
+  title,
+  options,
+  onSelect,
+  placeholder,
+  value,
+}: FilterButtonProps) => {
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState(value);
 
@@ -37,6 +43,7 @@ const FilterButton = ({ title, options, onSelect, placeholder, value }: FilterBu
             value={searchValue}
             onValueChange={(val) => {
               setSearchValue(val);
+
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {

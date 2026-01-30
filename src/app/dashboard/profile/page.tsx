@@ -13,7 +13,7 @@ const getUserInfo = async (): Promise<User> => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
     if (!response.data) {
       redirect('/login');

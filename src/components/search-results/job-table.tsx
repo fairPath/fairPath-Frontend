@@ -17,6 +17,8 @@ interface JobTableProps {
 }
 
 const JobTable = ({ jobs, selectedJob, setSelectedJob }: JobTableProps) => {
+
+
   return (
     <>
       <div className="grid grid-cols-1 gap-4 max-h-full overflow-y-auto pr-2">

@@ -33,7 +33,7 @@ function DashboardSearch() {
   ];
 
   const filteredRoles = items.filter((role) =>
-    role.label.toLowerCase().includes(searchValue.toLowerCase())
+    role.label.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
   const handleButtonClick = () => {

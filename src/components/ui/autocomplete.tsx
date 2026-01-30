@@ -1,6 +1,12 @@
 import { Command as CommandPrimitive } from 'cmdk';
 import { useMemo, useState } from 'react';
-import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from './command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandList,
+} from './command';
 import { Input } from './input';
 import { Popover, PopoverAnchor, PopoverContent } from './popover';
 import { Skeleton } from './skeleton';
@@ -34,13 +40,10 @@ export function AutoComplete<T extends string>({
 
   const labels = useMemo(
     () =>
-      items.reduce(
-        (acc, item) => {
-          acc[item.value] = item.label;
-          return acc;
-        },
-        {} as Record<string, string>
-      ),
+      items.reduce((acc, item) => {
+        acc[item.value] = item.label;
+        return acc;
+      }, {} as Record<string, string>),
     [items]
   );
 
@@ -50,7 +53,10 @@ export function AutoComplete<T extends string>({
   };
 
   const onInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (!e.relatedTarget?.hasAttribute('cmdk-list') && labels[selectedValue] !== searchValue) {
+    if (
+      !e.relatedTarget?.hasAttribute('cmdk-list') &&
+      labels[selectedValue] !== searchValue
+    ) {
       reset();
     }
   };
@@ -71,7 +77,11 @@ export function AutoComplete<T extends string>({
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (searchValue.trim()) {
-        router.push(`dashboard/search-results?titleOnly=${encodeURIComponent(searchValue.trim())}`);
+        router.push(
+          `dashboard/search-results?titleOnly=${encodeURIComponent(
+            searchValue.trim()
+          )}`
+        );
       }
     }
   };
@@ -98,7 +108,10 @@ export function AutoComplete<T extends string>({
             asChild
             onOpenAutoFocus={(e) => e.preventDefault()}
             onInteractOutside={(e) => {
-              if (e.target instanceof Element && e.target.hasAttribute('cmdk-input')) {
+              if (
+                e.target instanceof Element &&
+                e.target.hasAttribute('cmdk-input')
+              ) {
                 e.preventDefault();
               }
             }}
@@ -127,7 +140,9 @@ export function AutoComplete<T extends string>({
                   ))}
                 </CommandGroup>
               ) : null}
-              {!isLoading ? <CommandEmpty>{emptyMessage ?? 'No items.'}</CommandEmpty> : null}
+              {!isLoading ? (
+                <CommandEmpty>{emptyMessage ?? 'No items.'}</CommandEmpty>
+              ) : null}
             </CommandList>
           </PopoverContent>
         </Command>
