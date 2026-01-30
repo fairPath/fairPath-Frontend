@@ -148,7 +148,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
     <>
       {jobLoading && <Loading />}
       {!jobLoading && error && <div>error loading jobs: {error}</div>}
-      {!jobLoading && !error && (jobs.length === 0 && (
+      {!jobLoading && !error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
           <h2 className="text-2xl font-bold">No jobs found</h2>
           <p className="text-gray-500">Try a different search.</p>
@@ -159,7 +159,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
             Back to Dashboard
           </Button>
         </div>
-      ))}
+      )}
       {!jobLoading && !error && jobs.length > 0 && (
         <div className="h-screen flex flex-col px-4">
           {/* Search Inputs */}
