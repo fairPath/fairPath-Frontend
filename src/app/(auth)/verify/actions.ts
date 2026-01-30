@@ -3,10 +3,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 type VerifyResult = { ok: true } | { ok: false; error: string };
-export async function verify(
-  email: string,
-  formData: FormData,
-): Promise<VerifyResult> {
+export async function verify(email: string, formData: FormData): Promise<VerifyResult> {
   const code = formData.get('code');
 
   try {
@@ -17,7 +14,7 @@ export async function verify(
         headers: {
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     return { ok: true };
   } catch (error: unknown) {

@@ -12,7 +12,7 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
   return (
     <>
       {!job && (
-        <div className="flex items-center justify-center h-screen">
+        <div className="flex justify-center items-center">
           <p className="text-lg font-semibold">no job to display...</p>
         </div>
       )}
@@ -32,21 +32,12 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
                         dateStyle: 'full',
                       }).format(new Date(job.dateCreated))}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      {job.location}
-                    </p>
+                    <p className="text-sm text-muted-foreground">{job.location}</p>
                   </div>
 
                   <div className="flex justify-end flex-grow">
-                    <Button
-                      className=" bg-purple-600 hover:bg-blue-600"
-                      asChild
-                    >
-                      <a
-                        href={job.redirectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                    <Button className=" bg-purple-600 hover:bg-blue-600" asChild>
+                      <a href={job.redirectUrl} target="_blank" rel="noopener noreferrer">
                         Apply on Adzuna
                       </a>
                     </Button>
@@ -55,17 +46,12 @@ const JobDescription = ({ job }: JobDescriptionPageProps) => {
               </div>
 
               <div className="pt-4">
-                <p className="text-base whitespace-pre-line">
-                  {job.jobDescription}
-                </p>
+                <p className="text-base whitespace-pre-line">{job.jobDescription}</p>
               </div>
 
               <div className="pt-4 space-y-1">
                 <div className="flex flex-row justify-between">
                   <p className="text-lg font-medium">Salary</p>
-                  <span className="flex justify-end bg-purple-100 text-purple-800  font-semibold px-3 py-1 rounded-full">
-                    Diversity Score: {job.rating} / 5
-                  </span>
                 </div>
 
                 <p>

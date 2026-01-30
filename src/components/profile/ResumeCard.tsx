@@ -23,9 +23,7 @@ const ResumeCard = (user: User) => {
               <h3 className="text-sm font-medium text-foreground">Resume 1</h3>
               <p className="text-xs text-muted-foreground">
                 {user.resumeUpdatedAt
-                  ? `Updated at: ${new Date(
-                      user.resumeUpdatedAt,
-                    ).toLocaleDateString()}`
+                  ? `Updated at: ${new Date(user.resumeUpdatedAt).toLocaleDateString()}`
                   : 'No resume uploaded'}
               </p>
             </div>

@@ -1,13 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Download,
-  FilePlus,
-  MoreHorizontalIcon,
-  Search,
-  Trash,
-} from 'lucide-react';
+import { Download, FilePlus, MoreHorizontalIcon, Search, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -36,10 +30,7 @@ import { refresh } from 'next/cache';
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
 
-  async function uploadResume(
-    formData: FormData,
-    data: ResumePresignUrlResponse,
-  ) {
+  async function uploadResume(formData: FormData, data: ResumePresignUrlResponse) {
     console.log('Uploading resume with ID:', data.resumeId);
     console.log('Upload URL:', data.presignedUrl);
     console.log('Uploading resume with data:', data);
@@ -120,13 +111,7 @@ export function ResumeDropdown() {
             <FieldGroup className="pb-3">
               <Field>
                 <FieldLabel htmlFor="file">File</FieldLabel>
-                <Input
-                  name="file"
-                  id="file"
-                  type="file"
-                  accept=".pdf,application/pdf"
-                  required
-                />
+                <Input name="file" id="file" type="file" accept=".pdf,application/pdf" required />
               </Field>
             </FieldGroup>
             <DialogFooter>

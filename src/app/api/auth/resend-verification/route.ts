@@ -3,8 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const springBaseUrl =
-      process.env.SPRING_BASE_URL || 'http://localhost:8080';
+    const springBaseUrl = process.env.SPRING_BASE_URL || 'http://localhost:8080';
     const body = await request.json();
 
     await axios.post(`${springBaseUrl}/auth/resend`, body, {
@@ -13,10 +12,7 @@ export async function POST(request: Request) {
       },
     });
 
-    const newResponse = NextResponse.json(
-      { message: 'resend successful' },
-      { status: 200 }
-    );
+    const newResponse = NextResponse.json({ message: 'resend successful' }, { status: 200 });
     return newResponse;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

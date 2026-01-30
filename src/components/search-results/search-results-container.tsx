@@ -8,35 +8,36 @@ import { Button } from '../ui/button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import JobTable from './job-table';
 import { Job } from '@/types/Job';
-//import Loader from '../ui/loader';
 import axios from 'axios';
+import Loading from '../ui/loading';
 
-const SearchResultsContainer = () => {
+interface SearchResultsContainerProps {
+  token: string;
+}
+const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const searchParams = useSearchParams();
-  const sp = searchParams.toString();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [jobLoading, setJobLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
-  const [searchRole, setSearchRole] = useState<string>(
-    searchParams.get('titleOnly') || ''
-  );
-  const [searchLocation, setSearchLocation] = useState<string>(
-    searchParams.get('where') || ''
-  );
-  const [jobTypeFilter, setJobTypeFilter] = useState<string>(
-    searchParams.get('jobType') || ''
-  );
-  const [salaryFilter, setSalaryFilter] = useState<string>(
-    searchParams.get('salary') || ''
-  );
-  const [companyFilter, setCompanyFilter] = useState<string>(
-    searchParams.get('company') || ''
-  );
+  const [searchRole, setSearchRole] = useState<string>(searchParams.get('titleOnly') || '');
+  const [searchLocation, setSearchLocation] = useState<string>(searchParams.get('where') || '');
+  const [jobTypeFilter, setJobTypeFilter] = useState<string>(searchParams.get('jobType') || '');
+  const [salaryFilter, setSalaryFilter] = useState<string>(searchParams.get('salary') || '');
+  const [companyFilter, setCompanyFilter] = useState<string>(searchParams.get('company') || '');
   const [diversityFilter, setDiversityFilter] = useState<string>(
     searchParams.get('diversity') || ''
   );
+
+  const updateSavedJob = (job: Job) => {
+    const updatedJobs = jobs.map((j) => {
+      if (j.jobId === job.jobId) {
+        return job;
+      } else return j;
+    });
+    setJobs(updatedJobs);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +57,7 @@ const SearchResultsContainer = () => {
 
       // Call API and return mock data
       try {
-        setLoading(true);
+        setJobLoading(true);
         await axios
           .get<Job[]>(`/api/jobs`, {
             params: {
@@ -70,15 +71,15 @@ const SearchResultsContainer = () => {
             console.error(err);
           });
 
-        setLoading(false);
+        setJobLoading(false);
       } catch (error) {
-        setLoading(false);
+        setJobLoading(false);
         setError(`An error occurred while fetching jobs ${error}`);
       }
     };
 
     fetchData();
-  }, [sp]);
+  }, []);
 
   const searchJobs = async () => {
     const params = new URLSearchParams();
@@ -112,10 +113,7 @@ const SearchResultsContainer = () => {
         '$160k+': '160000',
         '$180k+': '180000',
       };
-      backendRequestParams.append(
-        'salaryMin',
-        salaryMinConversion[salaryFilter]
-      );
+      backendRequestParams.append('salaryMin', salaryMinConversion[salaryFilter]);
     }
     if (companyFilter) {
       params.append('company', companyFilter);
@@ -125,11 +123,8 @@ const SearchResultsContainer = () => {
       params.append('diversity', diversityFilter);
       backendRequestParams.append('rating', diversityFilter);
     }
-    // const queryString = params.toString();
-    // const url = `/dashboard/search-results?${queryString}`;
-    // router.push(url);
     try {
-      setLoading(true);
+      setJobLoading(true);
       await axios
         .get<Job[]>(`/api/jobs`, {
           params: backendRequestParams,
@@ -143,19 +138,17 @@ const SearchResultsContainer = () => {
       router.push(
         `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}&diversity=${diversityFilter}`
       );
-      setLoading(false);
+      setJobLoading(false);
     } catch (error) {
-      setLoading(false);
+      setJobLoading(false);
       setError(`An error occurred while fetching jobs ${error}`);
     }
   };
   return (
     <>
-      {loading && (
-        <div className="flex items-center justify-center w-full h-full"></div>
-      )}
-      {!loading && error && <div>error loading jobs: {error}</div>}
-      {!loading && !error && jobs.length === 0 && (
+      {jobLoading && <Loading />}
+      {!jobLoading && error && <div>error loading jobs: {error}</div>}
+      {!jobLoading && !error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
           <h2 className="text-2xl font-bold">No jobs found</h2>
           <p className="text-gray-500">Try a different search.</p>
@@ -167,7 +160,7 @@ const SearchResultsContainer = () => {
           </Button>
         </div>
       )}
-      {!loading && !error && jobs.length > 0 && (
+      {!jobLoading && !error && jobs.length > 0 && (
         <div className="h-screen flex flex-col px-4">
           {/* Search Inputs */}
           <div className="flex items-center justify-center gap-x-2 mb-6">
@@ -221,6 +214,8 @@ const SearchResultsContainer = () => {
               jobs={jobs}
               selectedJob={selectedJob}
               setSelectedJob={setSelectedJob}
+              updateSavedJob={updateSavedJob}
+              token={token}
             />
           </div>
         </div>
