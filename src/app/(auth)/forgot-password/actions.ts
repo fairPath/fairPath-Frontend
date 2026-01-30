@@ -8,9 +8,7 @@ export async function sendPasswordReset(
   const email = formData.get('email');
   try {
     await axios.post(
-      `${
-        process.env.SPRING_BASE_URL || 'http://localhost:8080'
-      }/auth/forgot-password`,
+      `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/auth/forgot-password`,
       { email },
       {
         headers: {
@@ -20,8 +18,7 @@ export async function sendPasswordReset(
     );
     return { ok: true };
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : 'Forgot password request failed';
+    const message = error instanceof Error ? error.message : 'Forgot password request failed';
     console.error('Forgot password error:', message);
     return {
       ok: false,

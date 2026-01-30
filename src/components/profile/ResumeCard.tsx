@@ -20,9 +20,7 @@ const ResumeCard = () => {
             </div>
             <div className="ml-4">
               <h3 className="text-sm font-medium text-foreground">Resume 1</h3>
-              <p className="text-xs text-muted-foreground">
-                Last updated: Today
-              </p>
+              <p className="text-xs text-muted-foreground">Last updated: Today</p>
             </div>
             <div className="ml-auto">
               <ResumeDropdown />

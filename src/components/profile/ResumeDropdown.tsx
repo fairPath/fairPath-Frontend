@@ -1,13 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Download,
-  FilePlus,
-  MoreHorizontalIcon,
-  Search,
-  Trash,
-} from 'lucide-react';
+import { Download, FilePlus, MoreHorizontalIcon, Search, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -77,8 +71,7 @@ export function ResumeDropdown() {
           <DialogHeader>
             <DialogTitle>Create New File</DialogTitle>
             <DialogDescription>
-              Provide a name for your new file. Click create when you&apos;re
-              done.
+              Provide a name for your new file. Click create when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
           <FieldGroup className="pb-3">

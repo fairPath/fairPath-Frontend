@@ -23,7 +23,6 @@ const JobFilters = ({
 }: JobFiltersProps) => {
   return (
     <div className="flex flex-wrap gap-2 mt-4">
-
       <FilterButton
         title="Job Type"
         options={['Full-Time', 'Part-Time', 'Contract']}
@@ -34,16 +33,7 @@ const JobFilters = ({
 
       <FilterButton
         title="Salary"
-        options={[
-          '$40k+',
-          '$60k+',
-          '$80k+',
-          '$100k+',
-          '$120k+',
-          '$140k+',
-          '$160k+',
-          '$180k+',
-        ]}
+        options={['$40k+', '$60k+', '$80k+', '$100k+', '$120k+', '$140k+', '$160k+', '$180k+']}
         value={salaryFilter}
         onSelect={(value) => setSalaryFilter(value)}
         placeholder="Select salary range..."
