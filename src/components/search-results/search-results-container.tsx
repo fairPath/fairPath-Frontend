@@ -37,7 +37,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
       } else return j;
     });
     setJobs(updatedJobs);
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
