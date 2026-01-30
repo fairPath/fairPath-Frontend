@@ -159,7 +159,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
             Back to Dashboard
           </Button>
         </div>
-      )}
+      ))}
       {!jobLoading && !error && jobs.length > 0 && (
         <div className="h-screen flex flex-col px-4">
           {/* Search Inputs */}
