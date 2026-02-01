@@ -43,7 +43,6 @@ export function UpdatePwForm({ token }: { token?: string }) {
             </Field>
             <FieldGroup>
               <Field>
-                {/* <Button type="submit">Reset Password</Button> */}
                 <SubmitButton message={'Resetting...'} label={'Reset'} />
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="/login">Sign in</a>

@@ -83,10 +83,8 @@ export function ResumeDropdown() {
           </FieldGroup>
           <DialogFooter>
             <DialogClose asChild>
-              {/* <Button variant="outline">Cancel</Button> */}
               <SubmitButton message={'Canceling...'} label={'Cancel'} />
             </DialogClose>
-            {/* <Button type="submit">Create</Button> */}
             <SubmitButton message={'Creating...'} label={'Create'} />
           </DialogFooter>
         </DialogContent>

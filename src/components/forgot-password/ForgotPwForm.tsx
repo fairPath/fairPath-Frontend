@@ -38,7 +38,6 @@ export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <FieldGroup>
               <Field>
-                {/* <Button type="submit">Reset Password</Button> */}
                 <SubmitButton message={'Resetting...'} label={'Reset'} />
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="/login">Sign in</a>
