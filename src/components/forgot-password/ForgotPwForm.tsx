@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { sendPasswordReset } from '@/app/(auth)/forgot-password/actions';
+import SubmitButton from './../ui/submitbutton';
 
 export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
@@ -38,7 +38,8 @@ export function ForgotPwForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="submit">Reset Password</Button>
+                {/* <Button type="submit">Reset Password</Button> */}
+                <SubmitButton message={'Resetting...'} label={'Reset'} />
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="/login">Sign in</a>
                 </FieldDescription>

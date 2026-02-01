@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import SubmitButton from './../ui/submitbutton';
 
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
@@ -82,9 +83,11 @@ export function ResumeDropdown() {
           </FieldGroup>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+              {/* <Button variant="outline">Cancel</Button> */}
+              <SubmitButton message={'Canceling...'} label={'Cancel'} />
             </DialogClose>
-            <Button type="submit">Create</Button>
+            {/* <Button type="submit">Create</Button> */}
+            <SubmitButton message={'Creating...'} label={'Create'} />
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -14,7 +14,7 @@ export default async function SearchResultsPage() {
     redirect('/login'); // ✅ server redirect
   }
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading message={'Loading...'} />}>
       <SearchResultsContainer token={token} />
     </Suspense>
   );

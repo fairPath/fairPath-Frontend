@@ -7,6 +7,7 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/c
 import { Input } from '@/components/ui/input';
 import { signup } from '@/app/(auth)/signup/actions';
 import { toast } from 'sonner';
+import SubmitButton from './submitbutton';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [state, formAction] = useActionState(signup, {
@@ -118,7 +119,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <SubmitButton message={'Creating Account...'} label={'Create Account'} />
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="/login">Sign in</a>
                 </FieldDescription>

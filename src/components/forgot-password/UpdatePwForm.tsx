@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { updatePassword } from '@/app/(auth)/update-password/actions';
+import SubmitButton from './../ui/submitbutton';
 
 export function UpdatePwForm({ token }: { token?: string }) {
   const router = useRouter();
@@ -43,7 +43,8 @@ export function UpdatePwForm({ token }: { token?: string }) {
             </Field>
             <FieldGroup>
               <Field>
-                <Button type="submit">Reset Password</Button>
+                {/* <Button type="submit">Reset Password</Button> */}
+                <SubmitButton message={'Resetting...'} label={'Reset'} />
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="/login">Sign in</a>
                 </FieldDescription>
