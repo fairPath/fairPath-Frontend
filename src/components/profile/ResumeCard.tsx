@@ -3,7 +3,11 @@ import { File } from 'lucide-react';
 import { ResumeDropdown } from './ResumeDropdown';
 import { User } from '@/types/User';
 
-const ResumeCard = (user: User) => {
+type ResumeCardProps = {
+  user: User;
+};
+
+const ResumeCard = ({ user }: ResumeCardProps) => {
   return (
     <div>
       {' '}

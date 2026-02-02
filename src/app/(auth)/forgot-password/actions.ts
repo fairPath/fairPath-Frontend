@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 export async function sendPasswordReset(
-  formData: FormData,
+  formData: FormData
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const email = formData.get('email');
   try {
@@ -14,7 +14,7 @@ export async function sendPasswordReset(
         headers: {
           'Content-Type': 'application/json',
         },
-      },
+      }
     );
     return { ok: true };
   } catch (error: unknown) {

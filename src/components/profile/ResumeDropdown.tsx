@@ -26,6 +26,7 @@ import { Input } from '@/components/ui/input';
 import { requestPresignUrl } from '@/app/dashboard/profile/action';
 import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
 import { refresh } from 'next/cache';
+import { toast } from 'sonner';
 
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
@@ -52,6 +53,28 @@ export function ResumeDropdown() {
       }
     } catch (error) {
       console.error('Error during resume upload:', error);
+    }
+  }
+
+  async function deleteResume() {
+    try {
+      const response = await fetch('http://localhost:8080/resumes/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.ok) {
+        toast.success('Resume deleted successfully');
+        refresh();
+      } else {
+        toast.error('Failed to delete resume');
+      }
+    } catch (error) {
+      console.error('Error during resume deletion:', error);
+      toast.error('An error occurred while deleting the resume');
     }
   }
 
@@ -84,7 +107,7 @@ export function ResumeDropdown() {
                 <Download className="text-foreground" />
               </DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem onSelect={() => deleteResume()} variant="destructive">
               Delete
               <DropdownMenuShortcut>
                 <Trash className="text-destructive" />
@@ -103,6 +126,7 @@ export function ResumeDropdown() {
               const res = await requestPresignUrl(formData);
               if (res?.ok) {
                 uploadResume(formData, res.data);
+                toast.success('Resume uploaded successfully');
                 setShowNewDialog(false);
                 refresh();
               }
