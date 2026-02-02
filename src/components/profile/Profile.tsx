@@ -1,5 +1,5 @@
 import { User } from '@/types/User';
-import { MailIcon, MapPin, Phone } from 'lucide-react';
+import { MailIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import ResumeCard from './ResumeCard';
 
