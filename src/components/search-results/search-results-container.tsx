@@ -146,7 +146,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   };
   return (
     <>
-      {jobLoading && <Loading />}
+      {jobLoading && <Loading message={'Loading...'} />}
       {!jobLoading && error && <div>error loading jobs: {error}</div>}
       {!jobLoading && !error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">

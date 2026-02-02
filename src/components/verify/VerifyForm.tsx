@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../ui/input-otp';
-import { Button } from '../ui/button';
 import { toast } from 'sonner';
 import { verify } from '@/app/(auth)/verify/actions';
+import SubmitButton from './../ui/submitbutton';
 
 const callResendAPI = async (email: string) => {
   const response = await fetch('/api/auth/resend-verification', {
@@ -79,9 +79,7 @@ const VerifyForm = ({ email }: { email: string }) => {
             </Field>
           </FieldGroup>
           <FieldGroup>
-            <Button type="submit" className="w-full mt-4">
-              Verify
-            </Button>
+            <SubmitButton message={'Sending Verification Code...'} label={'Verify'} />
             <FieldDescription className="text-center mt-2">
               {"Didn't receive the code? "}
               <a
