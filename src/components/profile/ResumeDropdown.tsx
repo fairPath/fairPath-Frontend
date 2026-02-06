@@ -23,9 +23,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { requestPresignUrl } from '@/app/dashboard/profile/action';
+import { deleteResume, downloadResume, requestPresignUrl } from '@/app/dashboard/profile/action';
 import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
-import { refresh } from 'next/cache';
 import { toast } from 'sonner';
 import SubmitButton from './../ui/submitbutton';
 
@@ -33,10 +32,6 @@ export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
 
   async function uploadResume(formData: FormData, data: ResumePresignUrlResponse) {
-    console.log('Uploading resume with ID:', data.resumeId);
-    console.log('Upload URL:', data.presignedUrl);
-    console.log('Uploading resume with data:', data);
-
     try {
       const response = await fetch(data.presignedUrl, {
         method: 'PUT',
@@ -47,7 +42,6 @@ export function ResumeDropdown() {
       });
 
       if (response.ok) {
-        console.log('Resume uploaded successfully');
         //after updating refresh page and also send confirm backend request to update table
       } else {
         console.error('Failed to upload resume');
@@ -57,25 +51,33 @@ export function ResumeDropdown() {
     }
   }
 
-  async function deleteResume() {
+  async function handleDeleteResume() {
+    //cud operations use actions
+    const result = await deleteResume();
+    if (result.ok) {
+      toast.success('Resume deleted successfully');
+    } else {
+      toast.error(`Failed to delete resume: ${result.error}`);
+    }
+  }
+
+  async function handleDownloadResume() {
+    //since we are reading we use route
     try {
-      const response = await fetch('http://localhost:8080/resumes/delete', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+      const res = await fetch('/api/dashboard/profile/resume', {
+        method: 'GET',
       });
 
-      if (response.ok) {
-        toast.success('Resume deleted successfully');
-        refresh();
-      } else {
-        toast.error('Failed to delete resume');
+      const data = await res.json();
+
+      if (!res.ok || !data?.url) {
+        toast.error(data?.error ?? 'Failed to start resume download');
+        return;
       }
-    } catch (error) {
-      console.error('Error during resume deletion:', error);
-      toast.error('An error occurred while deleting the resume');
+      window.open(data?.url);
+      toast.success('Resume download started');
+    } catch (err) {
+      toast.error('Network error while downloading resume');
     }
   }
 
@@ -91,24 +93,18 @@ export function ResumeDropdown() {
           <DropdownMenuLabel>File Actions</DropdownMenuLabel>
           <DropdownMenuGroup>
             <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
-              Preview
-              <DropdownMenuShortcut>
-                <Search className="text-foreground" />
-              </DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
               Upload New File..
               <DropdownMenuShortcut>
                 <FilePlus className="text-foreground" />
               </DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={handleDownloadResume}>
               Download
               <DropdownMenuShortcut>
                 <Download className="text-foreground" />
               </DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => deleteResume()} variant="destructive">
+            <DropdownMenuItem onSelect={handleDeleteResume} variant="destructive">
               Delete
               <DropdownMenuShortcut>
                 <Trash className="text-destructive" />
@@ -129,7 +125,6 @@ export function ResumeDropdown() {
                 uploadResume(formData, res.data);
                 toast.success('Resume uploaded successfully');
                 setShowNewDialog(false);
-                refresh();
               }
             }}
           >

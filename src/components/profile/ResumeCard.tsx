@@ -24,11 +24,13 @@ const ResumeCard = ({ user }: ResumeCardProps) => {
               <File className="size-8 text-muted-foreground" />
             </div>
             <div className="ml-4">
-              <h3 className="text-sm font-medium text-foreground">Resume 1</h3>
+              <h3 className="text-sm font-medium text-foreground">
+                {user.resumeFileName || 'No resume uploaded'}
+              </h3>
               <p className="text-xs text-muted-foreground">
                 {user.resumeUpdatedAt
                   ? `Updated at: ${new Date(user.resumeUpdatedAt).toLocaleDateString()}`
-                  : 'No resume uploaded'}
+                  : 'N/A'}
               </p>
             </div>
             <div className="ml-auto">
