@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { login } from '@/app/(auth)/login/actions';
 import { useRouter } from 'next/navigation';
+import SubmitButton from './submitbutton';
 export function LoginForm() {
   const router = useRouter();
   return (
@@ -51,7 +52,7 @@ export function LoginForm() {
           <Input id="password" type="password" name="password" required />
         </Field>
         <Field>
-          <Button type="submit">Login</Button>
+          <SubmitButton message={'Logging in...'} label={'Login'} />
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>

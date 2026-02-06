@@ -27,6 +27,7 @@ import { requestPresignUrl } from '@/app/dashboard/profile/action';
 import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
 import { refresh } from 'next/cache';
 import { toast } from 'sonner';
+import SubmitButton from './../ui/submitbutton';
 
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
@@ -142,7 +143,7 @@ export function ResumeDropdown() {
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <Button type="submit">Upload</Button>
+              <SubmitButton message={'Uploading...'} label={'Upload'} />
             </DialogFooter>
           </form>
         </DialogContent>
