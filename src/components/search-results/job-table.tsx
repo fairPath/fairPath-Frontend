@@ -32,7 +32,7 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
           updatedJob,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Cookie: `authToken=${token}`,
             },
           }
         );
@@ -51,7 +51,7 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
           {
             params: { jobId: job.jobId },
             headers: {
-              Authorization: `Bearer ${token}`,
+              Cookie: `authToken=${token}`,
             },
           }
         );

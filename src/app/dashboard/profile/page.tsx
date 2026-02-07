@@ -11,7 +11,7 @@ const getUserInfo = async (): Promise<User> => {
       `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/users/me`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Cookie: `authToken=${token}`,
         },
       }
     );

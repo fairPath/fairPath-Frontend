@@ -15,7 +15,7 @@ const getSavedJobs = async (token: string): Promise<Job[] | undefined> => {
       `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/list`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Cookie: `authToken=${token}`,
         },
       }
     );
