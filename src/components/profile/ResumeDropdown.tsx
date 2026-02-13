@@ -23,7 +23,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { deleteResume, downloadResume, requestPresignUrl } from '@/app/dashboard/profile/action';
+import {
+  confirmUpload,
+  deleteResume,
+  downloadResume,
+  requestPresignUrl,
+} from '@/app/dashboard/profile/action';
 import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
 import { toast } from 'sonner';
 import SubmitButton from './../ui/submitbutton';
@@ -42,6 +47,13 @@ export function ResumeDropdown() {
       });
 
       if (response.ok) {
+        console.log(`resume id being uploaded ${data.resumeId}`);
+        const confirmResult = await confirmUpload(data.resumeId);
+        if (!confirmResult.ok) {
+          toast.error(`Failed to confirm resume upload: ${confirmResult.error}`);
+        } else {
+          toast.success('Resume uploaded and confirmed successfully');
+        }
         //after updating refresh page and also send confirm backend request to update table
       } else {
         console.error('Failed to upload resume');

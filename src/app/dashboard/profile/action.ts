@@ -37,6 +37,34 @@ export async function requestPresignUrl(
   }
 }
 
+export async function confirmUpload(
+  resumeId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const authToken = (await cookies()).get('authToken')?.value;
+  if (!authToken) {
+    return { ok: false, error: 'Authentication token missing' };
+  }
+  try {
+    await axios.post(
+      `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/resumes/confirm`,
+      JSON.stringify(resumeId),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+
+    return { ok: true };
+  } catch (error: unknown) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
+
 export async function deleteResume(): Promise<{ ok: true } | { ok: false; error: string }> {
   const authToken = (await cookies()).get('authToken')?.value;
 
