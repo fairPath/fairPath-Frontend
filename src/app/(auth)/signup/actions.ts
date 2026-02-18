@@ -52,6 +52,7 @@ export async function signup(
     return { ok: false, fieldErrors, values: raw as Record<string, string> };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { confirmPassword, ...body } = parsed.data;
 
   try {

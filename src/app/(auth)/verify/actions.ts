@@ -1,6 +1,5 @@
 'use server';
 import axios from 'axios';
-import { toast } from 'sonner';
 
 type VerifyResult = { ok: true } | { ok: false; error: string };
 export async function verify(email: string, formData: FormData): Promise<VerifyResult> {

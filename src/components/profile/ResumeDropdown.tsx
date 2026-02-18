@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, FilePlus, MoreHorizontalIcon, Search, Trash } from 'lucide-react';
+import { Download, FilePlus, MoreHorizontalIcon, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -23,12 +23,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import {
-  confirmUpload,
-  deleteResume,
-  downloadResume,
-  requestPresignUrl,
-} from '@/app/dashboard/profile/action';
+import { confirmUpload, deleteResume, requestPresignUrl } from '@/app/dashboard/profile/action';
 import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
 import { toast } from 'sonner';
 import SubmitButton from './../ui/submitbutton';
@@ -89,7 +84,9 @@ export function ResumeDropdown() {
       window.open(data?.url);
       toast.success('Resume download started');
     } catch (err) {
-      toast.error('Network error while downloading resume');
+      toast.error(
+        `Network error while downloading resume: ${err instanceof Error ? err.message : 'Unknown error'}`
+      );
     }
   }
 
