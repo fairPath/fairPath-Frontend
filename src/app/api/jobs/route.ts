@@ -22,7 +22,7 @@ export async function GET(request: Request) {
       params: { titleOnly, where, jobType, salary, company, diversity },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
+        Cookie: `authToken=${authToken}`,
       },
     });
 
