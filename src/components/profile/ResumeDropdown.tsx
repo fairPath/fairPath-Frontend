@@ -42,7 +42,6 @@ export function ResumeDropdown() {
       });
 
       if (response.ok) {
-        console.log(`resume id being uploaded ${data.resumeId}`);
         const confirmResult = await confirmUpload(data.resumeId);
         if (!confirmResult.ok) {
           toast.error(`Failed to confirm resume upload: ${confirmResult.error}`);

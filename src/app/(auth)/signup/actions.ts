@@ -52,13 +52,10 @@ export async function signup(
     return { ok: false, fieldErrors, values: raw as Record<string, string> };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { confirmPassword, ...body } = parsed.data;
-
   try {
     await axios.post(
       `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/auth/signup`,
-      body,
+      JSON.stringify(parsed.data),
       {
         headers: {
           'Content-Type': 'application/json',
@@ -74,5 +71,5 @@ export async function signup(
       values: raw as Record<string, string>,
     };
   }
-  redirect(`/verify?email=${encodeURIComponent(body.email)}`);
+  redirect(`/verify?email=${encodeURIComponent(parsed.data.email)}`);
 }
