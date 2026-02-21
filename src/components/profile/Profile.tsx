@@ -1,5 +1,5 @@
 import { User } from '@/types/User';
-import { MailIcon, MapPin, Phone } from 'lucide-react';
+import { MailIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import ResumeCard from './ResumeCard';
 
@@ -28,19 +28,11 @@ const Profile = ({ user }: ProfileProps) => {
                 <MailIcon className="size-4" />
                 <span>{user.email}</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone className="size-4" />
-                <span>999-999-999</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="size-4" />
-                <span>NJ,US</span>
-              </div>
             </div>
           </CardContent>
         </Card>
 
-        <ResumeCard />
+        <ResumeCard user={user} />
       </div>
     </div>
   );
