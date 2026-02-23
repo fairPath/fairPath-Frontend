@@ -10,7 +10,6 @@ export async function GET(request: Request) {
     const jobType = url.searchParams.get('jobType') || '';
     const salary = url.searchParams.get('salary') || '';
     const company = url.searchParams.get('company') || '';
-    const diversity = url.searchParams.get('diversity') || '';
     const springBaseUrl = process.env.SPRING_BASE_URL || 'http://localhost:8080';
     const authToken = (await cookies()).get('authToken')?.value;
 
@@ -19,7 +18,7 @@ export async function GET(request: Request) {
     }
 
     const response = await axios.get(`${springBaseUrl}/jobs`, {
-      params: { titleOnly, where, jobType, salary, company, diversity },
+      params: { titleOnly, where, jobType, salary, company },
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`,

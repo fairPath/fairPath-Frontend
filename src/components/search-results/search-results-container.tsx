@@ -26,9 +26,6 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
   const [jobTypeFilter, setJobTypeFilter] = useState<string>(searchParams.get('jobType') || '');
   const [salaryFilter, setSalaryFilter] = useState<string>(searchParams.get('salary') || '');
   const [companyFilter, setCompanyFilter] = useState<string>(searchParams.get('company') || '');
-  const [diversityFilter, setDiversityFilter] = useState<string>(
-    searchParams.get('diversity') || ''
-  );
 
   const updateSavedJob = (job: Job) => {
     const updatedJobs = jobs.map((j) => {
@@ -46,14 +43,12 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
       const jobType = searchParams.get('jobType');
       const salary = searchParams.get('salary');
       const company = searchParams.get('company');
-      const diversity = searchParams.get('diversity');
 
       if (title) setSearchRole(title);
       if (location) setSearchLocation(location);
       if (jobType) setJobTypeFilter(jobType);
       if (salary) setSalaryFilter(salary);
       if (company) setCompanyFilter(company);
-      if (diversity) setDiversityFilter(diversity);
 
       // Call API and return mock data
       try {
@@ -119,10 +114,6 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
       params.append('company', companyFilter);
       backendRequestParams.append('company', companyFilter);
     }
-    if (diversityFilter) {
-      params.append('diversity', diversityFilter);
-      backendRequestParams.append('rating', diversityFilter);
-    }
     try {
       setJobLoading(true);
       await axios
@@ -136,7 +127,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
           console.error(err);
         });
       router.push(
-        `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}&diversity=${diversityFilter}`
+        `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}`
       );
       setJobLoading(false);
     } catch (error) {
@@ -203,8 +194,6 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
               setSalaryFilter={setSalaryFilter}
               companyFilter={companyFilter}
               setCompanyFilter={setCompanyFilter}
-              diversityFilter={diversityFilter}
-              setDiversityFilter={setDiversityFilter}
             />
           </div>
 
