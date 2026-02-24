@@ -13,7 +13,14 @@ import { toast } from 'sonner';
 import { login } from '@/app/(auth)/login/actions';
 import { useRouter } from 'next/navigation';
 import SubmitButton from './submitbutton';
-export function LoginForm() {
+import { useEffect } from 'react';
+export function LoginForm({ reason }: { reason?: string }) {
+  useEffect(() => {
+    if (reason === 'unauthorized') {
+      toast.error('Unauthorized access. Please login to continue.');
+    }
+  }, [reason]);
+
   const router = useRouter();
   return (
     <form
