@@ -2,8 +2,15 @@ import { GalleryVerticalEnd } from 'lucide-react';
 
 import { LoginForm } from '@/components/ui/login-form';
 
-export default async function LoginPage({ searchParams }: { searchParams: { reason?: string } }) {
+type LoginPageProps = {
+  searchParams: Promise<{
+    reason?: string;
+  }>;
+};
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -17,7 +24,7 @@ export default async function LoginPage({ searchParams }: { searchParams: { reas
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm reason={params?.reason} />
+            <LoginForm initialReason={params.reason} key={params.reason ?? 'login'} />
           </div>
         </div>
       </div>

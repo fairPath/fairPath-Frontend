@@ -11,13 +11,19 @@ import {
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { login } from '@/app/(auth)/login/actions';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import SubmitButton from './submitbutton';
 import { useEffect } from 'react';
-export function LoginForm({ reason }: { reason?: string }) {
+
+export function LoginForm({ initialReason }: { initialReason?: string }) {
+  const searchParams = useSearchParams();
+  const reason = searchParams.get('reason') ?? initialReason;
+
   useEffect(() => {
     if (reason === 'unauthorized') {
-      toast.error('Unauthorized access. Please login to continue.');
+      toast.error('Unauthorized access. Please login to continue.', {
+        id: 'login-unauthorized',
+      });
     }
   }, [reason]);
 
