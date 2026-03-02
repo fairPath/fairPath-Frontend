@@ -133,6 +133,7 @@ export function ResumeDropdown() {
                 const uploadResult = await uploadResume(formData, res.data);
                 if (uploadResult?.ok) {
                   setShowNewDialog(false);
+                  toast.success('Resume uploaded successfully');
                 } else {
                   toast.error(`Upload failed: ${uploadResult?.error ?? 'Unknown error'}`);
                 }
