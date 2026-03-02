@@ -28,6 +28,7 @@ export async function login(formData: FormData): Promise<LoginResult> {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
+      expires: new Date(Date.now() + response.data?.expiresIn),
       path: '/',
     });
     return { ok: true };

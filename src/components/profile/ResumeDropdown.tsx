@@ -23,39 +23,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { confirmUpload, deleteResume, requestPresignUrl } from '@/app/dashboard/profile/action';
-import { ResumePresignUrlResponse } from '@/types/ResumePresignUrlResponse';
+import { deleteResume, requestPresignUrl, uploadResume } from '@/app/dashboard/profile/action';
 import { toast } from 'sonner';
 import SubmitButton from './../ui/submitbutton';
 
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
-
-  async function uploadResume(formData: FormData, data: ResumePresignUrlResponse) {
-    try {
-      const response = await fetch(data.presignedUrl, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/pdf',
-        },
-        body: formData.get('file') as File, // Ensure the body contains the file content
-      });
-
-      if (response.ok) {
-        const confirmResult = await confirmUpload(data.resumeId);
-        if (!confirmResult.ok) {
-          toast.error(`Failed to confirm resume upload: ${confirmResult.error}`);
-        } else {
-          toast.success('Resume uploaded and confirmed successfully');
-        }
-        //after updating refresh page and also send confirm backend request to update table
-      } else {
-        console.error('Failed to upload resume');
-      }
-    } catch (error) {
-      console.error('Error during resume upload:', error);
-    }
-  }
 
   async function handleDeleteResume() {
     //cud operations use actions
@@ -130,9 +103,13 @@ export function ResumeDropdown() {
             action={async (formData) => {
               const res = await requestPresignUrl(formData);
               if (res?.ok) {
-                uploadResume(formData, res.data);
-                toast.success('Resume uploaded successfully');
-                setShowNewDialog(false);
+                const uploadResult = await uploadResume(formData, res.data);
+                if (uploadResult?.ok) {
+                  setShowNewDialog(false);
+                  toast.success('Resume uploaded successfully');
+                } else {
+                  toast.error(`Upload failed: ${uploadResult?.error ?? 'Unknown error'}`);
+                }
               }
             }}
           >
