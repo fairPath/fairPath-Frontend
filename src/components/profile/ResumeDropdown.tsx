@@ -30,33 +30,6 @@ import SubmitButton from './../ui/submitbutton';
 export function ResumeDropdown() {
   const [showNewDialog, setShowNewDialog] = useState(false);
 
-  // async function uploadResume(formData: FormData, data: ResumePresignUrlResponse) {
-  //   try {
-  //     const response = await fetch(data.presignedUrl, {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/pdf',
-  //       },
-  //       body: formData.get('file') as File, // Ensure the body contains the file content
-  //     });
-
-  //     if (response.ok) {
-  //       const confirmResult = await confirmUpload(data.resumeId);
-  //       if (!confirmResult.ok) {
-  //         toast.error(`Failed to confirm resume upload: ${confirmResult.error}`);
-  //       } else {
-  //         toast.success('Resume uploaded and confirmed successfully');
-  //         //start analysis for resume
-  //       }
-  //       //after updating refresh page and also send confirm backend request to update table
-  //     } else {
-  //       console.error('Failed to upload resume');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error during resume upload:', error);
-  //   }
-  // }
-
   async function handleDeleteResume() {
     //cud operations use actions
     const result = await deleteResume();
