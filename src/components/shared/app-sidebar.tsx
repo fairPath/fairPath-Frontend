@@ -1,4 +1,4 @@
-import { Bookmark, Home, Search, User } from 'lucide-react';
+import { Bookmark, Home, LogOut, Search, User } from 'lucide-react';
 
 import {
   Sidebar,
@@ -33,6 +33,11 @@ const items = [
     title: 'Profile',
     url: '/dashboard/profile',
     icon: User,
+  },
+  {
+    title: 'logout',
+    url: '/logout',
+    icon: LogOut,
   },
 ];
 
