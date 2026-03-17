@@ -1,6 +1,6 @@
 'use server';
 
-import axios from 'axios';
+import { getResponseError } from '@/lib/fetch-response';
 
 type UpdateResult = { ok: true } | { ok: false; error: string };
 
@@ -11,16 +11,17 @@ export async function updatePassword(
   const password = formData.get('password');
 
   try {
-    const response = await axios.put(
+    const response = await fetch(
       `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/auth/update-password`,
-      { password, resetToken: token },
       {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, resetToken: token }),
       }
     );
 
     if (response.status !== 200) {
-      return { ok: false, error: 'Update password failed' };
+      return { ok: false, error: await getResponseError(response, 'Update password failed') };
     }
 
     return { ok: true };

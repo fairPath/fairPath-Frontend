@@ -71,7 +71,9 @@ export function AutoComplete<T extends string>({
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (searchValue.trim()) {
-        router.push(`dashboard/search-results?titleOnly=${encodeURIComponent(searchValue.trim())}`);
+        router.push(
+          `/dashboard/search-results?titleOnly=${encodeURIComponent(searchValue.trim())}`
+        );
       }
     }
   };

@@ -8,9 +8,8 @@ import { Job } from '@/types/Job';
 
 interface SavedJobsProps {
   jobs: Job[] | undefined;
-  token: string;
 }
-const SavedJobs = ({ jobs, token }: SavedJobsProps) => {
+const SavedJobs = ({ jobs }: SavedJobsProps) => {
   const router = useRouter();
   const [savedJobs, setSavedJobs] = useState<Job[] | undefined>(jobs);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
@@ -48,7 +47,6 @@ const SavedJobs = ({ jobs, token }: SavedJobsProps) => {
               selectedJob={selectedJob}
               setSelectedJob={setSelectedJob}
               updateSavedJob={updateSavedJob}
-              token={token}
             />
           </div>
         </div>

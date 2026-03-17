@@ -1,154 +1,86 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { Input } from '../ui/input';
 import { LocateFixedIcon, Search } from 'lucide-react';
 import JobFilters from './job-filters';
 import { Button } from '../ui/button';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import JobTable from './job-table';
 import { Job } from '@/types/Job';
-import axios from 'axios';
 import Loading from '../ui/loading';
+import { buildSearchResultsParams, JobSearchFilters } from '@/lib/job-search';
 
-interface SearchResultsContainerProps {
-  token: string;
-}
-const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
-  const searchParams = useSearchParams();
+type SearchResultsContainerProps = {
+  initialJobs: Job[];
+  initialFilters: JobSearchFilters;
+  initialError?: string | null;
+};
+
+const SearchResultsContainer = ({
+  initialJobs,
+  initialFilters,
+  initialError = null,
+}: SearchResultsContainerProps) => {
   const router = useRouter();
-  const [jobLoading, setJobLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
-  const [jobs, setJobs] = useState<Job[]>([]); // Replace 'any' with your job type
-  const [searchRole, setSearchRole] = useState<string>(searchParams.get('titleOnly') || '');
-  const [searchLocation, setSearchLocation] = useState<string>(searchParams.get('where') || '');
-  const [jobTypeFilter, setJobTypeFilter] = useState<string>(searchParams.get('jobType') || '');
-  const [salaryFilter, setSalaryFilter] = useState<string>(searchParams.get('salary') || '');
-  const [companyFilter, setCompanyFilter] = useState<string>(searchParams.get('company') || '');
-  const [diversityFilter, setDiversityFilter] = useState<string>(
-    searchParams.get('diversity') || ''
-  );
-
-  const updateSavedJob = (job: Job) => {
-    const updatedJobs = jobs.map((j) => {
-      if (j.jobId === job.jobId) {
-        return job;
-      } else return j;
-    });
-    setJobs(updatedJobs);
-  };
+  const [error, setError] = useState<string | null>(initialError);
+  const [jobs, setJobs] = useState<Job[]>(initialJobs);
+  const [searchRole, setSearchRole] = useState<string>(initialFilters.titleOnly);
+  const [searchLocation, setSearchLocation] = useState<string>(initialFilters.where);
+  const [jobTypeFilter, setJobTypeFilter] = useState<string>(initialFilters.jobType);
+  const [salaryFilter, setSalaryFilter] = useState<string>(initialFilters.salary);
+  const [companyFilter, setCompanyFilter] = useState<string>(initialFilters.company);
+  const [diversityFilter, setDiversityFilter] = useState<string>(initialFilters.diversity);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const title = searchParams.get('titleOnly');
-      const location = searchParams.get('where');
-      const jobType = searchParams.get('jobType');
-      const salary = searchParams.get('salary');
-      const company = searchParams.get('company');
-      const diversity = searchParams.get('diversity');
+    setJobs(initialJobs);
+    setError(initialError);
+    setSelectedJob(null);
+  }, [initialError, initialJobs]);
 
-      if (title) setSearchRole(title);
-      if (location) setSearchLocation(location);
-      if (jobType) setJobTypeFilter(jobType);
-      if (salary) setSalaryFilter(salary);
-      if (company) setCompanyFilter(company);
-      if (diversity) setDiversityFilter(diversity);
+  useEffect(() => {
+    setSearchRole(initialFilters.titleOnly);
+    setSearchLocation(initialFilters.where);
+    setJobTypeFilter(initialFilters.jobType);
+    setSalaryFilter(initialFilters.salary);
+    setCompanyFilter(initialFilters.company);
+    setDiversityFilter(initialFilters.diversity);
+  }, [initialFilters]);
 
-      // Call API and return mock data
-      try {
-        setJobLoading(true);
-        await axios
-          .get<Job[]>(`/api/jobs`, {
-            params: {
-              titleOnly: title,
-            },
-          })
-          .then((res) => {
-            setJobs(res.data);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-
-        setJobLoading(false);
-      } catch (error) {
-        setJobLoading(false);
-        setError(`An error occurred while fetching jobs ${error}`);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const searchJobs = async () => {
-    const params = new URLSearchParams();
-    const backendRequestParams = new URLSearchParams();
-    if (searchRole) {
-      params.append('titleOnly', searchRole);
-      backendRequestParams.append('titleOnly', searchRole);
-    }
-    if (searchLocation) {
-      params.append('where', searchLocation);
-      backendRequestParams.append('where', searchLocation);
-    }
-    if (jobTypeFilter) {
-      params.append('jobType', jobTypeFilter);
-      const jobTypeConversion: Record<string, string> = {
-        'Full-Time': 'fullTime',
-        'Part-Time': 'partTime',
-        Contract: 'contract',
-      };
-      backendRequestParams.append(jobTypeConversion[jobTypeFilter], '1');
-    }
-    if (salaryFilter) {
-      params.append('salary', salaryFilter);
-      const salaryMinConversion: Record<string, string> = {
-        '$40k+': '40000',
-        '$60k+': '60000',
-        '$80k+': '80000',
-        '$100k+': '100000',
-        '$120k+': '120000',
-        '$140k+': '140000',
-        '$160k+': '160000',
-        '$180k+': '180000',
-      };
-      backendRequestParams.append('salaryMin', salaryMinConversion[salaryFilter]);
-    }
-    if (companyFilter) {
-      params.append('company', companyFilter);
-      backendRequestParams.append('company', companyFilter);
-    }
-    if (diversityFilter) {
-      params.append('diversity', diversityFilter);
-      backendRequestParams.append('rating', diversityFilter);
-    }
-    try {
-      setJobLoading(true);
-      await axios
-        .get<Job[]>(`/api/jobs`, {
-          params: backendRequestParams,
-        })
-        .then((res) => {
-          setJobs(res.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      router.push(
-        `/dashboard/search-results?title=${searchRole}&location=${searchLocation}&jobType=${jobTypeFilter}&salary=${salaryFilter}&company=${companyFilter}&diversity=${diversityFilter}`
-      );
-      setJobLoading(false);
-    } catch (error) {
-      setJobLoading(false);
-      setError(`An error occurred while fetching jobs ${error}`);
-    }
+  const updateSavedJob = (job: Job) => {
+    setJobs((currentJobs) =>
+      currentJobs.map((currentJob) => (currentJob.jobId === job.jobId ? job : currentJob))
+    );
+    setSelectedJob((currentJob) => (currentJob?.jobId === job.jobId ? job : currentJob));
   };
+
+  const searchJobs = () => {
+    const params = buildSearchResultsParams({
+      titleOnly: searchRole,
+      where: searchLocation,
+      jobType: jobTypeFilter,
+      salary: salaryFilter,
+      company: companyFilter,
+      diversity: diversityFilter,
+    });
+    const query = params.toString();
+
+    setError(null);
+    startTransition(() => {
+      router.push(query ? `/dashboard/search-results?${query}` : '/dashboard/search-results');
+    });
+  };
+
+  if (isPending) {
+    return <Loading message={'Loading...'} />;
+  }
+
   return (
     <>
-      {jobLoading && <Loading message={'Loading...'} />}
-      {!jobLoading && error && <div>error loading jobs: {error}</div>}
-      {!jobLoading && !error && jobs.length === 0 && (
+      {error && <div>error loading jobs: {error}</div>}
+      {!error && jobs.length === 0 && (
         <div className="flex flex-col items-center justify-center h-screen">
           <h2 className="text-2xl font-bold">No jobs found</h2>
           <p className="text-gray-500">Try a different search.</p>
@@ -160,7 +92,7 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
           </Button>
         </div>
       )}
-      {!jobLoading && !error && jobs.length > 0 && (
+      {!error && jobs.length > 0 && (
         <div className="h-screen flex flex-col px-4">
           {/* Search Inputs */}
           <div className="flex items-center justify-center gap-x-2 mb-6">
@@ -215,7 +147,6 @@ const SearchResultsContainer = ({ token }: SearchResultsContainerProps) => {
               selectedJob={selectedJob}
               setSelectedJob={setSelectedJob}
               updateSavedJob={updateSavedJob}
-              token={token}
             />
           </div>
         </div>

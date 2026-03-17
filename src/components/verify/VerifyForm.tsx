@@ -5,24 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '../ui/field';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../ui/input-otp';
 import { toast } from 'sonner';
-import { verify } from '@/app/(auth)/verify/actions';
+import { resendVerification, verify } from '@/app/(auth)/verify/actions';
 import SubmitButton from './../ui/submitbutton';
-
-const callResendAPI = async (email: string) => {
-  const response = await fetch('/api/auth/resend-verification', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  });
-
-  if (!response.ok) {
-    console.error('Resend verification code failed');
-  } else {
-    toast.success('Verification code resent successfully.');
-  }
-};
 const VerifyForm = ({ email }: { email: string }) => {
   const router = useRouter();
   const verifyWithEmail = verify.bind(null, email);
@@ -84,8 +68,14 @@ const VerifyForm = ({ email }: { email: string }) => {
               {"Didn't receive the code? "}
               <a
                 className="text-blue-500 underline"
-                onClick={() => {
-                  callResendAPI(email);
+                onClick={async () => {
+                  const result = await resendVerification(email);
+                  if (!result.ok) {
+                    toast.error(result.error);
+                    return;
+                  }
+
+                  toast.success('Verification code resent successfully.');
                 }}
               >
                 Resend Code
