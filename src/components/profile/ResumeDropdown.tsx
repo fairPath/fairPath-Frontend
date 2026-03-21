@@ -23,7 +23,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { deleteResume, requestPresignUrl, uploadResume } from '@/app/dashboard/profile/action';
+import {
+  confirmUpload,
+  deleteResume,
+  getResumeDownloadUrl,
+  requestPresignUrl,
+} from '@/app/dashboard/profile/action';
 import { toast } from 'sonner';
 import SubmitButton from './../ui/submitbutton';
 
@@ -41,25 +46,67 @@ export function ResumeDropdown() {
   }
 
   async function handleDownloadResume() {
-    //since we are reading we use route
     try {
-      const res = await fetch('/api/dashboard/profile/resume', {
-        method: 'GET',
-      });
+      const result = await getResumeDownloadUrl();
 
-      const data = await res.json();
-
-      if (!res.ok || !data?.url) {
-        toast.error(data?.error ?? 'Failed to start resume download');
+      if (!result.ok) {
+        toast.error(result.error ?? 'Failed to start resume download');
         return;
       }
-      window.open(data?.url);
+
+      if (!result.url) {
+        toast.error('Failed to start resume download');
+        return;
+      }
+
+      window.open(result.url);
       toast.success('Resume download started');
     } catch (err) {
       toast.error(
         `Network error while downloading resume: ${err instanceof Error ? err.message : 'Unknown error'}`
       );
     }
+  }
+
+  async function handleUpload(formData: FormData) {
+    const file = formData.get('file');
+
+    if (!(file instanceof File)) {
+      toast.error('Missing file');
+      return;
+    }
+
+    const presignResult = await requestPresignUrl(formData);
+    if (!presignResult.ok) {
+      toast.error(`Upload failed: ${presignResult.error}`);
+      return;
+    }
+
+    try {
+      const uploadResponse = await fetch(presignResult.data.presignedUrl, {
+        method: 'PUT',
+        body: file,
+      });
+
+      if (!uploadResponse.ok) {
+        toast.error('Upload failed: Failed to upload resume');
+        return;
+      }
+    } catch (error) {
+      toast.error(
+        `Upload failed: ${error instanceof Error ? error.message : 'Unknown upload error'}`
+      );
+      return;
+    }
+
+    const confirmResult = await confirmUpload(presignResult.data.resumeId);
+    if (!confirmResult.ok) {
+      toast.error(`Upload failed: ${confirmResult.error}`);
+      return;
+    }
+
+    setShowNewDialog(false);
+    toast.success('Resume uploaded successfully');
   }
 
   return (
@@ -101,16 +148,7 @@ export function ResumeDropdown() {
           </DialogHeader>
           <form
             action={async (formData) => {
-              const res = await requestPresignUrl(formData);
-              if (res?.ok) {
-                const uploadResult = await uploadResume(formData, res.data);
-                if (uploadResult?.ok) {
-                  setShowNewDialog(false);
-                  toast.success('Resume uploaded successfully');
-                } else {
-                  toast.error(`Upload failed: ${uploadResult?.error ?? 'Unknown error'}`);
-                }
-              }
+              await handleUpload(formData);
             }}
           >
             <FieldGroup className="pb-3">

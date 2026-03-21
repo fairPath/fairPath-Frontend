@@ -6,7 +6,9 @@ import JobCard from './job-card';
 import JobDescription from './job-description';
 import { Job } from '@/types/Job';
 import { Star } from 'lucide-react';
-import axios from 'axios';
+import { toast } from 'sonner';
+
+import { deleteSavedJob, saveJob } from '@/app/dashboard/search-results/action';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -18,54 +20,21 @@ interface JobTableProps {
   selectedJob: Job | null;
   setSelectedJob: (job: Job | null) => void;
   updateSavedJob: (jobs: Job) => void;
-  token: string;
 }
 
-const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: JobTableProps) => {
-  const handleClick = (job: Job, index: number) => {
+const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob }: JobTableProps) => {
+  const handleClick = async (job: Job) => {
     const saved = !job.saved;
     const updatedJob = { ...job, saved };
-    const saveJob = async () => {
-      try {
-        const response = await axios.post(
-          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/save`,
-          updatedJob,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.data === 'success') {
-          updateSavedJob(updatedJob);
-        }
-      } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : 'Get user failed';
-        console.error(message);
-      }
-    };
-    const deleteJob = async () => {
-      try {
-        const response = await axios.delete(
-          `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/saved-jobs/delete`,
-          {
-            params: { jobId: job.jobId },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.data === 'successully deleted') {
-          updateSavedJob(updatedJob);
-        }
-      } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : 'delete user failed';
-        console.error(message);
-      }
-    };
 
-    if (saved) saveJob();
-    else deleteJob();
+    const result = saved ? await saveJob(updatedJob) : await deleteSavedJob(job.jobId);
+
+    if (!result.ok) {
+      toast.error(result.error);
+      return;
+    }
+
+    updateSavedJob(updatedJob);
   };
 
   return (
@@ -86,7 +55,7 @@ const JobTable = ({ jobs, selectedJob, setSelectedJob, updateSavedJob, token }: 
             <div className=" flex fill-purple-600">
               <Star
                 fill={job.saved ? 'purple' : 'none'}
-                onClick={() => handleClick(job, index)}
+                onClick={() => void handleClick(job)}
                 style={{ cursor: 'pointer' }}
               />
             </div>

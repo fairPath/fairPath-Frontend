@@ -1,8 +1,9 @@
 'use server';
 
-import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+
+import { getResponseError } from '@/lib/fetch-response';
 
 const signupSchema = z
   .object({
@@ -53,15 +54,20 @@ export async function signup(
   }
 
   try {
-    await axios.post(
+    const response = await fetch(
       `${process.env.SPRING_BASE_URL || 'http://localhost:8080'}/auth/signup`,
-      JSON.stringify(parsed.data),
       {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(parsed.data),
       }
     );
+
+    if (!response.ok) {
+      throw new Error(await getResponseError(response, 'Sign up failed'));
+    }
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Sign up failed';
     console.error('sign up error:', message);
