@@ -49,8 +49,13 @@ export function ResumeDropdown() {
     try {
       const result = await getResumeDownloadUrl();
 
-      if (!result.ok || !result.url) {
+      if (!result.ok) {
         toast.error(result.error ?? 'Failed to start resume download');
+        return;
+      }
+
+      if (!result.url) {
+        toast.error('Failed to start resume download');
         return;
       }
 
