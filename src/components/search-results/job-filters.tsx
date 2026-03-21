@@ -7,8 +7,6 @@ interface JobFiltersProps {
   setSalaryFilter: (value: string) => void;
   companyFilter: string;
   setCompanyFilter: (value: string) => void;
-  diversityFilter: string;
-  setDiversityFilter: (value: string) => void;
 }
 
 const JobFilters = ({
@@ -18,8 +16,6 @@ const JobFilters = ({
   setSalaryFilter,
   companyFilter,
   setCompanyFilter,
-  diversityFilter,
-  setDiversityFilter,
 }: JobFiltersProps) => {
   return (
     <div className="flex flex-wrap gap-2 mt-4">
@@ -45,14 +41,6 @@ const JobFilters = ({
         onSelect={(value) => setCompanyFilter(value)}
         value={companyFilter}
         placeholder="Select company..."
-      />
-
-      <FilterButton
-        title="Diversity Score"
-        options={['1', '2', '3', '4', '5']}
-        onSelect={(value) => setDiversityFilter(value)}
-        value={diversityFilter}
-        placeholder="Select minimum diversity score..."
       />
     </div>
   );
