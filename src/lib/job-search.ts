@@ -4,7 +4,6 @@ export type JobSearchFilters = {
   jobType: string;
   salary: string;
   company: string;
-  diversity: string;
 };
 
 type SearchParamValue = string | string[] | undefined;
@@ -42,7 +41,6 @@ export const getJobSearchFilters = (
   jobType: getSearchParamValue(searchParams.jobType),
   salary: getSearchParamValue(searchParams.salary),
   company: getSearchParamValue(searchParams.company),
-  diversity: getSearchParamValue(searchParams.diversity),
 });
 
 export const buildSearchResultsParams = (filters: JobSearchFilters): URLSearchParams => {
@@ -62,9 +60,6 @@ export const buildSearchResultsParams = (filters: JobSearchFilters): URLSearchPa
   }
   if (filters.company) {
     params.set('company', filters.company);
-  }
-  if (filters.diversity) {
-    params.set('diversity', filters.diversity);
   }
 
   return params;
@@ -91,9 +86,6 @@ export const buildJobsBackendParams = (filters: JobSearchFilters): URLSearchPara
   }
   if (filters.company) {
     params.set('company', filters.company);
-  }
-  if (filters.diversity) {
-    params.set('rating', filters.diversity);
   }
 
   return params;

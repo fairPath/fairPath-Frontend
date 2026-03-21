@@ -32,7 +32,6 @@ const SearchResultsContainer = ({
   const [jobTypeFilter, setJobTypeFilter] = useState<string>(initialFilters.jobType);
   const [salaryFilter, setSalaryFilter] = useState<string>(initialFilters.salary);
   const [companyFilter, setCompanyFilter] = useState<string>(initialFilters.company);
-  const [diversityFilter, setDiversityFilter] = useState<string>(initialFilters.diversity);
 
   useEffect(() => {
     setJobs(initialJobs);
@@ -46,7 +45,6 @@ const SearchResultsContainer = ({
     setJobTypeFilter(initialFilters.jobType);
     setSalaryFilter(initialFilters.salary);
     setCompanyFilter(initialFilters.company);
-    setDiversityFilter(initialFilters.diversity);
   }, [initialFilters]);
 
   const updateSavedJob = (job: Job) => {
@@ -63,7 +61,6 @@ const SearchResultsContainer = ({
       jobType: jobTypeFilter,
       salary: salaryFilter,
       company: companyFilter,
-      diversity: diversityFilter,
     });
     const query = params.toString();
 
@@ -135,8 +132,6 @@ const SearchResultsContainer = ({
               setSalaryFilter={setSalaryFilter}
               companyFilter={companyFilter}
               setCompanyFilter={setCompanyFilter}
-              diversityFilter={diversityFilter}
-              setDiversityFilter={setDiversityFilter}
             />
           </div>
 
