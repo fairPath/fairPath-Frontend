@@ -21,7 +21,6 @@ export async function requestPresignUrl(
       method: 'POST',
       body: JSON.stringify({ filename: fileName }),
     });
-    revalidatePath('/dashboard/profile');
     return { ok: true, data };
   } catch (error: unknown) {
     if (isRedirectError(error)) {
@@ -34,32 +33,6 @@ export async function requestPresignUrl(
   }
 }
 
-export async function uploadResume(
-  formData: FormData,
-  data: ResumePresignUrlResponse
-): Promise<ActionResult> {
-  try {
-    const response = await fetch(data.presignedUrl, {
-      method: 'PUT',
-      body: formData.get('file') as File, // Ensure the body contains the file content
-    });
-
-    if (response.ok) {
-      return await confirmUpload(data.resumeId);
-      //after updating refresh page and also send confirm backend request to update table
-    } else {
-      console.error('Failed to upload resume');
-      return { ok: false, error: 'Failed to upload resume' };
-    }
-  } catch (error) {
-    if (isRedirectError(error)) {
-      throw error;
-    }
-    console.error('Error during resume upload:', error);
-    return { ok: false, error: error instanceof Error ? error.message : 'Unknown error' };
-  }
-}
-
 export async function confirmUpload(resumeId: string): Promise<ActionResult> {
   try {
     await serverApiFetch<void>('/resumes/confirm', {
@@ -67,6 +40,7 @@ export async function confirmUpload(resumeId: string): Promise<ActionResult> {
       body: JSON.stringify({ resumeId }),
     });
 
+    revalidatePath('/dashboard/profile');
     return { ok: true };
   } catch (error: unknown) {
     if (isRedirectError(error)) {
@@ -92,6 +66,31 @@ export async function deleteResume(): Promise<ActionResult> {
     if (isRedirectError(error)) {
       throw error;
     }
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+}
+
+export async function getResumeDownloadUrl(): Promise<
+  { ok: true; url: string } | { ok: false; error: string }
+> {
+  try {
+    const url = await serverApiFetch<string>('/resumes/download', {
+      method: 'GET',
+    });
+
+    if (!url) {
+      return { ok: false, error: 'Failed to get download URL' };
+    }
+
+    return { ok: true, url };
+  } catch (error: unknown) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
     return {
       ok: false,
       error: error instanceof Error ? error.message : 'Unknown error',
